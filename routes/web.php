@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Homecontroller;
+use App\Http\Controllers\Backend\Homecontroller;
+use App\Http\Controllers\Frontend\Homecontroller as HomeControllerF;
 
 
 /*
@@ -14,5 +15,9 @@ use App\Http\Controllers\Homecontroller;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// backend
+Route::get('/admin', [Homecontroller::class, 'index'])->name('admin');
 
-Route::get('/', [Homecontroller::class, 'index'])->name('home');
+// frontend
+Route::get('/',[HomeControllerF::class, 'index'])->name('home') ;
+
