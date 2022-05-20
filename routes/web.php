@@ -31,7 +31,7 @@ Route::get('/',[HomeControllerF::class, 'index'])->name('home') ;
 Route::get('kategori/{id}',[HomeControllerF::class, 'kategori'])->name('kategori') ;
 
 Route::group(['middleware' => 'guest:login'], function (){
-    Route::get('/', [Logincontroller::class, 'login'])->name('login');
+    Route::get('login', [Logincontroller::class, 'login'])->name('login');
     Route::post('aksilogin', [Logincontroller::class, 'aksilogin'])->name('aksilogin');
     Route::get('register', [Logincontroller::class, 'register'])->name('register');
     Route::post('daftar',  [Logincontroller::class, 'daftar'])->name('daftar');
@@ -40,7 +40,7 @@ Route::group(['middleware' => 'guest:login'], function (){
 //Backend
 Route::group(['middleware' => ['web', 'auth:login']], function (){
     //home
-    Route::get('home', [Homecontroller::class, 'index'])->name('home');
+    Route::get('admin', [Homecontroller::class, 'index'])->name('admin');
 
     //tabel user
     Route::get('user', [Usercontroller::class, 'index'])->name('user');
