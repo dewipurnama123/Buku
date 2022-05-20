@@ -20,6 +20,8 @@ class CreateKeranjangtmpsTable extends Migration
             $table->date('tgl');
             $table->integer('stok');
             $table->string('ket');
+            $table->integer('harga');
+            $table->integer('quantity');
             $table->float('total');
             $table->timestamps();
         });

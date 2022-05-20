@@ -15,6 +15,8 @@ class Keranjangtmp extends Model
         'tgl',
         'stok',
         'ket',
+        'harga',
+        'quantity',
         'total',
     ];
 }

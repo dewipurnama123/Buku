@@ -15,6 +15,8 @@ class Keranjang extends Model
         'tgl',
         'stok',
         'ket',
+        'harga',
+        'quantity',
         'total',
     ];
 }
