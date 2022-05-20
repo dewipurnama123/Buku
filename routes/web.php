@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Homecontroller;
 use App\Http\Controllers\Backend\Logincontroller;
 use App\Http\Controllers\Backend\Usercontroller;
 use App\Http\Controllers\Backend\Kategoricontroller;
@@ -9,6 +8,8 @@ use App\Http\Controllers\Backend\Membercontroller;
 use App\Http\Controllers\Backend\Bukucontroller;
 use App\Http\Controllers\Backend\Transaksicontroller;
 use App\Http\Controllers\Backend\Keranjangcontroller;
+use App\Http\Controllers\Backend\Homecontroller;
+use App\Http\Controllers\Frontend\Homecontroller as HomeControllerF;
 
 
 /*
@@ -21,7 +22,13 @@ use App\Http\Controllers\Backend\Keranjangcontroller;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// backend
+Route::get('/admin', [Homecontroller::class, 'index'])->name('admin');
 
+
+// frontend
+Route::get('/',[HomeControllerF::class, 'index'])->name('home') ;
+Route::get('kategori/{id}',[HomeControllerF::class, 'kategori'])->name('kategori') ;
 
 Route::group(['middleware' => 'guest:login'], function (){
     Route::get('/', [Logincontroller::class, 'login'])->name('login');

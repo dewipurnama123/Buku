@@ -86,4 +86,7 @@ class UserController extends Controller
             return redirect('input-user')->with('error', 'Data gagal dihapus');
         }
     }
+class UserController extends Controller
+{
+    //
 }
