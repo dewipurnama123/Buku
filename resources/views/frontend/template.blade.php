@@ -184,34 +184,18 @@
 				<div class="navy">
 					<ul>
 						<!-- Main menu -->
-						<li><a href="#">Home</a>
+						<li><a href="{{ route('home')}}">Home</a>
 							<!-- Submenu -->
-							<ul>
-
-								<li><a href="index.html">Home 1</a></li>
-								<li><a href="index-2.html"><span>Home 2</span></a></li>
-								<li><a href="index-3.html"><span>Home 3</span></a></li>
-
-							</ul>
+							
 						</li>
 
 						<li><a href="#">Kategori</a>
 							<ul>
-								<li><a href="#">Footer</a>
-									<ul>
-										<li><a href="footer-one.html">Footer1</a></li>
-										<li><a href="footer-two.html">Footer2</a></li>
-										<li><a href="footer-three.html">Footer3</a></li>
-									</ul>
-								</li>
-								<li><a href="#">Price Table</a>
-									<ul>
-										<li><a href="price-table-one.html">Price Table1</a></li>
-										<li><a href="price-table-two.html">Price Table2</a></li>
-
-									</ul>
-								</li>
-
+							@foreach ($kategori as $i => $isi)
+							
+								<li><a href="{{ route('kategori',$isi->id_kategori)}}">{{$isi->nama_kategori}}</a></li>
+								@endforeach
+							
 							</ul>
 						</li>
 

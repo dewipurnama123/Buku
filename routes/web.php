@@ -18,6 +18,9 @@ use App\Http\Controllers\Frontend\Homecontroller as HomeControllerF;
 // backend
 Route::get('/admin', [Homecontroller::class, 'index'])->name('admin');
 
+
 // frontend
 Route::get('/',[HomeControllerF::class, 'index'])->name('home') ;
+Route::get('kategori/{id}',[HomeControllerF::class, 'kategori'])->name('kategori') ;
+
 

@@ -11,10 +11,22 @@ use Illuminate\Support\Facades\DB;
 class HomeController extends Controller
 {
     public function index(){
+        $data['kategori'] = DB::table('kategoris')->get();
         $data['buku'] = DB::table('bukus')
-        ->join('kategoris','bukus.id_kategori','=','kategoris.id_kategori')
-        ->get();
+        ->paginate(12);
         return view ('frontend.page.home',$data);
         
     }
+    public function kategori($id){
+        $data['kate'] = DB::table('kategoris')->where('kategoris.id_kategori',$id)->first();
+        $data['kategori'] = DB::table('kategoris')->get();
+        $data['buku'] = DB::table('bukus')
+        ->join('kategoris','bukus.id_kategori','=','kategoris.id_kategori')
+        ->where('kategoris.id_kategori',$id)
+        ->get();
+        return view ('frontend.page.kategori',$data);
+        
+    }
+
+    
 }
