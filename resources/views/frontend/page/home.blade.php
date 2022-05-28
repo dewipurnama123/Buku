@@ -16,7 +16,7 @@
 							<div class="title">Kategori Buku<i class="fa fa-angle-down"></i></div>
 							<div class="list">
 							@foreach ($kategori as $i => $isi)
-							<a class="entry" href="{{ route('kategori',$isi->id_kategori)}}">
+							<a class="entry" href="{{ route('kategoriF',$isi->id_kategori)}}">
 								<span><i class="fa fa-angle-right"></i>{{$isi->nama_kategori}}</span></a>
                               @endforeach
 							
@@ -98,7 +98,8 @@
 								<div class="shopping-item">
 									<!-- Image -->
 									
-									<a href="single-product.html"><img class="center" src="{{ asset('frontend/buku/'. $isi->gambar) }}" alt="" height="200" 	 /></a>
+                                    </a>
+									<a href="{{route('detail',$isi->id_buku)}}"><img class="center" src="{{ asset('frontend/buku/'. $isi->gambar) }}" alt="" height="200" 	 /></a>
 									<!-- Shopping item name / Heading -->
 									
 									<h4><a href="{{ route('home',$isi->id_buku)}}">{{Str::limit($isi->judul, 10)}}</a></h4>
@@ -106,11 +107,25 @@
 									<div class="clearfix"></div>
 									<!-- Buy now button -->
 									<div class="visible-xs">
-							<a class="btn btn-color btn-sm" href="#">Buy Now</a>
 						</div>
 						<!-- Shopping item hover block & link -->
 						<div class="item-hover bg-color hidden-xs">
-							<a href="#">Add to cart</a>
+							
+						<form action="{{ route('simpan-cart')}}" method="post" enctype="multipart/form-data">
+						@csrf
+						<input   type="hidden" name="id_buku" id="id_buku" value="{{$isi->id_buku}}" >
+						<input   type="hidden" name="tgl" id="tgl" >
+						<input   type="hidden" name="qty" id="qty" value="1" >
+						<input   type="hidden" name="total" id="total"  >
+						
+                        <button type="submit" class="btn btn-primary btn-block"> Add to cart</button>
+					</form>
+					<form action="{{ route('simpan-wish')}}" method="post" enctype="multipart/form-data">
+						@csrf
+						<input   type="hidden" name="id_buku" id="id_buku" value="{{$isi->id_buku}}" >
+
+						<button type="submit" class="btn btn-info btn-block"> Add to wishlist</button>
+					</form>
 						</div>
 					</div>
 				</div>
@@ -123,7 +138,28 @@
 	</div>
 </section>
 
+<div class="modal" id="login">
+  <div class="modal-dialog">
+    <div class="modal-content">
 
+      <!-- Modal Header -->
+      <div class="modal-header">
+		  <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Silakan Login Terlebih Dahulu!!!</h4>
+      </div>
+<form action="{{route('loginf')}}" method="post">
+	@csrf
+	<!-- Modal body -->
+	<div class="modal-body">
+	  Silahkan Tekan tombol login ubntuk melanjutkan
+	</div>
+
+	<!-- Modal footer -->
+	<div class="modal-footer">
+	  <button type="button" class="btn btn-info" data-dismiss="modal">Batal</button>
+	  <button type="submit" class="btn btn-danger">Login</button>
+	</div>
+</form>
 	<!-- Start Our Shop Items -->
 
 	

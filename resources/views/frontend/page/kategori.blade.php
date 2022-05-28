@@ -26,7 +26,7 @@
 								<div class="shopping-item">
 									<!-- Image -->
 									
-									<a href="single-product.html"><img class="center" src="{{ asset('frontend/buku/'. $isi->gambar) }}" alt="" height="200" 	 /></a>
+									<a href="{{route('detail',$isi->id_buku)}}"><img class="center" src="{{ asset('frontend/buku/'. $isi->gambar) }}" alt="" height="200" 	 /></a>
 									<!-- Shopping item name / Heading -->
 									
 									<h4><a href="{{ route('home',$isi->id_buku)}}">{{Str::limit($isi->judul, 10)}}</a></h4>
@@ -38,7 +38,23 @@
 						</div>
 						<!-- Shopping item hover block & link -->
 						<div class="item-hover bg-color hidden-xs">
-							<a href="#">Add to cart</a>
+						<form action="{{ route('simpan-cart')}}" method="post" enctype="multipart/form-data">
+						@csrf
+						<input   type="hidden" name="id_member" id="id_member" value="1" >
+						<input   type="hidden" name="id_buku" id="id_buku" value="{{$isi->id_buku}}" >
+						<input   type="hidden" name="tgl" id="tgl" >
+						<input   type="hidden" name="qty" id="qty" value="1" >
+						<input   type="hidden" name="total" id="total" >
+						
+                        <button type="submit" class="btn btn-primary btn-block"> Add to cart</button>
+					</form>
+					<form action="{{ route('simpan-wish')}}" method="post" enctype="multipart/form-data">
+						@csrf
+						<input   type="hidden" name="id_member" id="id_member" value="1" >
+						<input   type="hidden" name="id_buku" id="id_buku" value="{{$isi->id_buku}}" >
+
+						<button type="submit" class="btn btn-info btn-block"> Add to wishlist</button>
+					</form>
 						</div>
 					</div>
 				</div>
