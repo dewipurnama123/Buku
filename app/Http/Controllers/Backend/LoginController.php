@@ -45,7 +45,7 @@ class LoginController extends Controller
         ]);
         if(Auth::guard("login")->attempt($login)){
             $r->session()->regenerate();
-            return redirect('home');
+            return redirect('admin');
         }
         return back();
     }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMembersTable extends Migration
+class CreateWishlistsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class CreateMembersTable extends Migration
      */
     public function up()
     {
-        Schema::create('members', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama');
-            $table->string('alamat');
-            $table->string('nohp');
-            $table->string('email');
-            $table->string('password');
-            $table-> rememberToken();
+        Schema::create('wishlists', function (Blueprint $table) {
+            $table->increments('id_wishlist');
+            $table->string('id_member');
+            $table->string('id_buku');
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ class CreateMembersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tb_members');
+        Schema::dropIfExists('wishlists');
     }
 }

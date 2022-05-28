@@ -44,6 +44,10 @@ return [
             'driver' => 'session',
             'provider' => 'logins',
         ],
+        'member' => [
+            'driver' => 'session',
+            'provider' => 'members',
+        ],
 
     ],
 
@@ -74,6 +78,11 @@ return [
             'table' => 'logins',
             'model' => App\Models\Login::class,
         ],
+        'members' => [
+            'driver' => 'database',
+            'table' => 'members',
+            'model' => App\Models\Member::class,
+        ],
 
         // 'users' => [
         //     'driver' => 'database',
@@ -99,6 +108,12 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'members' => [
+            'provider' => 'members',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

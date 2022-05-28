@@ -78,39 +78,36 @@
 			<!-- Shopping kart starts -->
 			<div class="tb-shopping-cart pull-right">
 				<!-- Link with badge -->
-				<a href="#" class="btn btn-white btn-xs b-dropdown"><i class="fa fa-shopping-cart"></i> <i class="fa fa-angle-down color"></i> <span class="badge badge-color">2</span></a>
+				
+				<a href="#" class="btn btn-white btn-xs b-dropdown"><i class="fa fa-shopping-cart"></i> <i class="fa fa-angle-down color"></i> <span class="badge badge-color">1</span></a>
 				<!-- Dropdown content with item details -->
 				<div class="b-dropdown-block">
 					<!-- Heading -->
 					<h4><i class="fa fa-shopping-cart color"></i> Your Items</h4>
+					@foreach ($cart as $i => $isi)
 					<ul class="list-unstyled">
 						<!-- Item 1 -->
 						<li>
 							<!-- Item image -->
 							<div class="cart-img">
-								<a href="#"><img src="img/ecommerce/view-cart/1.png" alt="" class="img-responsive" /></a>
+								<a href="#"><img src="{{ asset('frontend/buku/'. $isi->gambar) }}" alt="" class="img-responsive" /></a>
 							</div>
+
 							<!-- Item heading and price -->
 							<div class="cart-title">
-								<h5><a href="#">Premium Quality Shirt</a></h5>
+								<h5><a href="#">{{ $isi->judul}}</a></h5>
 								<!-- Item price -->
-								<span class="label label-color label-sm">$1,90</span>
+								<h5>	<span class="label label-color label-sm">Rp. {{ $isi->harga}} </span>
+							x
+								<span class="label label-color label-sm">  {{ $isi->qty}}</span>
 							</div>
 							<div class="clearfix"></div>
 						</li>
-						<!-- Item 2 -->
-						<li>
-							<div class="cart-img">
-								<a href="#"><img src="img/ecommerce/view-cart/2.png" alt="" class="img-responsive" /></a>
-							</div>
-							<div class="cart-title">
-								<h5><a href="#">Premium Quality Shirt</a></h5>
-								<span class="label label-color label-sm">$1,20</span>
-							</div>
-							<div class="clearfix"></div>
-						</li>
+						
 					</ul>
-					<a href="#" class="btn btn-white btn-sm">View Cart</a> &nbsp; <a href="#" class="btn btn-color btn-sm">Checkout</a>
+					@endforeach
+
+					<a href="{{route('cart')}}" class="btn btn-white btn-sm">View Cart</a> &nbsp; <a href="#" class="btn btn-color btn-sm">Checkout</a>
 				</div>
 			</div>
 			<!-- Shopping kart ends -->
@@ -188,91 +185,45 @@
 							<!-- Submenu -->
 							
 						</li>
-
 						<li><a href="#">Kategori</a>
 							<ul>
 							@foreach ($kategori as $i => $isi)
 							
-								<li><a href="{{ route('kategori',$isi->id_kategori)}}">{{$isi->nama_kategori}}</a></li>
+								<li><a href="{{ route('kategoriF',$isi->id_kategori)}}">{{$isi->nama_kategori}}</a></li>
 								@endforeach
 							
 							</ul>
 						</li>
 
+					
 						<li><a href="#">Member</a>
 							<ul>
-								<li><a href="#">Laptop</a>
-									<ul>
-										<li><a href="#">Vaio</a></li>
-										<li><a href="#">Samsung</a></li>
-										<li><a href="#">Toshiba</a></li>
-										<li><a href="#">HP</a></li>
-
-									</ul>
-								</li>
-								<li><a href="#">Smartphone</a>
-									<ul>
-										<li><a href="#">Iphone</a></li>
-										<li><a href="#">Oppo</a></li>
-										<li><a href="#">Nokia</a></li>
-										<li><a href="#">Sony</a></li>
-										<li><a href="#">Samsung</a></li>
-
-									</ul>
-								</li>
-								<li><a href="#">Accessories</a>
-									<ul>
-										<li><a href="#">Headphone</a></li>
-										<li><a href="#">Adapter</a></li>
-										<li><a href="#">Bag</a></li>
-										<li><a href="#">Baby doll</a></li>
-
-									</ul>
-								</li>
+							@if(session('id_member') != '')
+							<li><a href="#" role="button" onclick="logouts()">Logout</a></li>		
+							@else
+							<li><a href="{{ route('loginf')}}">Login</a></li>
+							<li><a href="{{ route('registerf')}}">Daftar</a></li>
+							@endif
+								
 								<!-- Multi level menu -->
-								<li><a href="#">Multi Level Menu</a>
-									<ul>
-										<!-- Sub menu -->
-										<li><a href="#">Menu #1</a></li>
-										<li><a href="#">Menu #1</a></li>
-										<li><a href="#">Menu #1</a>
-											<ul>
-												<!-- Sub menu -->
-												<li><a href="#">Menu #2</a></li>
-												<li><a href="#">Menu #2</a></li>
-												<li><a href="#">Menu #2</a>
-													<ul>
-														<!-- Sub menu -->
-														<li><a href="#">Menu #3</a></li>
-														<li><a href="#">Menu #3</a></li>
-														<li><a href="#">Menu #3</a></li>
-													</ul>
-												</li>
-											</ul>
-										</li>
-									</ul>
-								</li>
+								
 							</ul>
 						</li>
-
-					
-
 						<li><a href="#">Transaksi</a>
 							<ul>
-								<li><a href="shop.html"><span>Shop</span></a></li>
-								<li><a href="single-product.html"><span>Single product</span></a></li>
-								<li><a href="shopping-cart.html"><span>Cart</span></a></li>
-								<li><a href="checkout.html"><span>Checkout</span></a></li>
-								<li><a href="wishlist.html"><span>Wishlist</span></a></li>
-								<li><a href="signin.html"><span>Sign In</span></a></li>
-								<li><a href="signup.html"><span>Sign Up</span></a></li>
-								<li><a href="404.html"><span>404 Page</span></a></li>
+								<li><a href="{{ route('cart')}}"><span>Keranjang</span></a></li>
+								<li><a href="single-product.html"><span>Transaksi</span></a></li>
+								<li><a href="{{ route('wishlist')}}"><span>Wishlist</span></a></li>
+								<li><a href="{{ route('pembayaran')}}"><span>Status Pembayaran</span></a></li>
+								<li><a href="{{ route('wishlist')}}"><span>Status Pengiriman</span></a></li>
+								
 							</ul>
 						</li>
 
-						<li><a href="about.html">About </a></li>
-						<li><a href="contact.html">Admin</a></li>
+						<li><a href="{{ route('about')}}">About </a></li>
+						<li><a href="{{ route('login')}}">Admin</a></li>
 					</ul>
+				
 				</div>
 			</div>
 		</div>
@@ -282,6 +233,28 @@
 	</div>
 
 	<!-- Header one ends -->
+	<div class="modal" id="logout">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+		  <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Yakin Ingin Keuar?</h4>
+      </div>
+<form action="{{route('logoutf')}}" method="post">
+	@csrf
+	<!-- Modal body -->
+	<div class="modal-body">
+	  Silahkan Tekan tombol keluar ubntuk melanjutkan
+	</div>
+
+	<!-- Modal footer -->
+	<div class="modal-footer">
+	  <button type="button" class="btn btn-info" data-dismiss="modal">Batal</button>
+	  <button type="submit" class="btn btn-danger">Keluar</button>
+	</div>
+</form>
 
 </header>
 <!-- end header -->
@@ -422,6 +395,10 @@
 	/* Owl Carousel */
 	/* ************ */
 
+	function logouts()
+	{
+		$('#logout').modal('show')
+	}
 	$(document).ready(function() {
 		/* Owl carousel */
 		$(".owl-carousel").owlCarousel({
