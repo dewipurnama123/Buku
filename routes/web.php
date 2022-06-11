@@ -54,24 +54,24 @@ Route::group(['middleware' => 'guest:member'], function (){
     Route::post('aksiloginf', [LogincontrollerF::class, 'aksiloginf'])->name('aksiloginf');
     Route::get('registerf', [LogincontrollerF::class, 'registerf'])->name('registerf');
     Route::post('daftarf',  [LogincontrollerF::class, 'daftarf'])->name('daftarf');
-    
+
 });
-Route::group(['middleware' => ['web', 'auth:member']], function (){   
-    
+Route::group(['middleware' => ['web', 'auth:member']], function (){
+
     Route::get('cart',[TransControllerF::class, 'cart'])->name('cart') ;
     Route::get('cart1',[TransControllerF::class, 'cart1'])->name('cart1') ;
     Route::post('simpan-cart',[TransControllerF::class, 'keranjang'])->name('simpan-cart') ;
     Route::get('hapus-cart/{id}',[TransControllerF::class, 'hapus'])->name('hapus-cart') ;
-    
+
     Route::get('qtytambah/{id_keranjang}/{id_buku}',[TransControllerF::class, 'qtytambah'])->name('qtytambah') ;
     Route::get('qtykurang/{id_keranjang}/{id_buku}',[TransControllerF::class, 'qtykurang'])->name('qtykurang') ;
-    
+
     Route::get('wishlist',[HomeControllerF::class, 'wishlist'])->name('wishlist') ;
     Route::post('simpan-wish',[HomeControllerF::class, 'wish'])->name('simpan-wish') ;
     Route::get('hapus-wish/{id}',[HomeControllerF::class, 'hapus'])->name('hapus-wish') ;
-    
+
     Route::get('pembayaran',[PembayaranControllerF::class, 'index'])->name('pembayaran') ;
-    
+
 });
 Route::post('logoutf', [LogincontrollerF::class, 'logoutf'])->name('logoutf');
 
