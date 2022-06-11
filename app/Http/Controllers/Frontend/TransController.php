@@ -58,8 +58,6 @@ class TransController extends Controller
                 ->update([
                     'qty' => $cek->qty+1, 
                     'total' => $cek->total+$harga,
-                    
-
                 ]); 
             }else{    
                 $simpan= DB::table('keranjangtmps')->insert([
