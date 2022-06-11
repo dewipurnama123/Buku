@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\Bukucontroller;
 use App\Http\Controllers\Backend\Transaksicontroller;
 use App\Http\Controllers\Backend\Keranjangcontroller;
 use App\Http\Controllers\Backend\Homecontroller;
+use App\Http\Controllers\Backend\GetApi;
 use App\Http\Controllers\Frontend\Homecontroller as HomeControllerF;
 
 
@@ -83,14 +84,18 @@ Route::group(['middleware' => ['web', 'auth:login']], function (){
     Route::get('hapus-transaksi/{id_transaksi}', [Transaksicontroller::class, 'hapustransaksi'])->name('hapus-transaksi');
 
     //tabel keranjang
-    Route::get('keranjang', [Keranjangcontroller::class, 'index'])->name('keranjang');
+    Route::get('keranjang/{tanggal?}', [Keranjangcontroller::class, 'index'])->name('keranjang');
     Route::get('input-keranjang', [Keranjangcontroller::class, 'tambahkeranjang'])->name('input-keranjang');
     Route::post('simpan-keranjang', [Keranjangcontroller::class, 'save'])->name('simpan-keranjang');
     Route::get('edit-keranjang/{id_keranjang}', [Keranjangcontroller::class, 'editkeranjang'])->name('edit-keranjang');
     Route::post('update-keranjang/{id_keranjang}', [Keranjangcontroller::class, 'updatekeranjang'])->name('update-keranjang');
     Route::get('hapus-keranjang/{id_keranjang}', [Keranjangcontroller::class, 'hapuskeranjang'])->name('hapus-keranjang');
     Route::post('data', [Keranjangcontroller::class, 'data'])->name('data');
+    Route::post('filtertgl', [Keranjangcontroller::class, 'filtertanggal'])->name('filtertgl');
+
+    Route::get('/', [GetApi::class, 'index'])->name('index');
 
     //logout
+    Route::post('logout', [Logincontroller::class, 'logout'])->name('logout');
     Route::post('logout', [Logincontroller::class, 'logout'])->name('logout');
 });

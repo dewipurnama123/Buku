@@ -16,7 +16,9 @@ class TransaksiController extends Controller
         // singkatan ddcadalah dump die
         //dd($data['transaksi']);
         ->join('members', 'transaksis.id_member','=','members.id_member')
-        ->get();
+        // ->get();
+        //paginaton
+        ->simplePaginate(1);
         return view('backend.page.transaksi', $data);
     }
     public function tambahtransaksi()

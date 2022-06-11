@@ -13,8 +13,11 @@ class MemberController extends Controller
 {
     public function index()
     {
-        $data['member'] = DB::table('members')->get();
-        // singkatan ddcadalah dump die
+        $data['member'] = DB::table('members')
+        // ->get();
+        //pagination
+        ->simplePaginate(4);
+        // singkatan dd adalah dump die
         //dd($data['member']);
         return view('backend.page.member', $data);
     }
@@ -27,6 +30,8 @@ class MemberController extends Controller
         $validator = Validator::make($r->all(), [
             'nama' => 'required',
             'alamat' => 'required',
+            'provinsi' => 'required',
+            'kecamatan' => 'required',
             'nohp' => 'required',
             'email' => 'required',
             'password' => 'required',
@@ -40,6 +45,8 @@ class MemberController extends Controller
         $simpan = Member::insert([
             'nama' => $r->nama,
             'alamat' => $r->alamat,
+            'provinsi'=> $r->provinsi,
+            'kecamatan'=> $r->kecamatan,
             'nohp' => $r->nohp,
             'email' => $r->email,
             'password' => $r->password,
@@ -61,6 +68,8 @@ class MemberController extends Controller
         $validator = Validator::make($r->all(), [
             'nama' => 'required',
             'alamat' => 'required',
+            'provinsi' => 'required',
+            'kecamatan' => 'required',
             'nohp' => 'required',
             'email' => 'required',
             'password' => 'required',
@@ -74,6 +83,8 @@ class MemberController extends Controller
         $simpan = Member::where('id_member', $id)->update([
             'nama' => $r->nama,
             'alamat' => $r->alamat,
+            'provinsi'=> $r->provinsi,
+            'kecamatan'=> $r->kecamatan,
             'nohp' => $r->nohp,
             'email' => $r->email,
             'password' => $r->password

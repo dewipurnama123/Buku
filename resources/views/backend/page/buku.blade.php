@@ -17,7 +17,7 @@ Data Buku
                 </div>
             </div>
             <div class="card-body">
-                <table class="table table-striped">
+                <table class="table table-striped table-hover">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -35,13 +35,16 @@ Data Buku
                     <tbody>
                         @foreach($buku as $i=> $isi)
                         <tr>
-                            <td>{{ $i + 1 }}</td>
+                            <!-- //pagination -->
+                            <td>{{$buku->firstItem() +$i}}</td>
+                            <!-- // -->
+                            <!-- <td>{{ $i + 1 }}</td> -->
                             <td>{{ $isi->nama_kategori }}</td>
                             <td>{{ $isi->judul }}</td>
                             <td>{{ $isi->penerbit }}</td>
                             <td>{{ $isi->pengarang }}</td>
                             <td>{{ $isi->tahun }}</td>
-                            <td>{{ $isi->harga }}</td>
+                            <td>Rp. {{number_format ($isi->harga) }}</td>
                             <td>{{ $isi->stok }}</td>
                             <td><img src="{{asset('gambar/'.$isi->gambar)}}"  width="30%" alt=""></td>
                             <td>
@@ -54,6 +57,17 @@ Data Buku
                         @endforeach
                     </tbody>
                 </table>
+                <!-- //pagination -->
+                <div class="float-left">
+                    Showing
+                    {{$buku->firstItem()}}
+                    to
+                    {{$buku->lastItem()}}
+                </div>
+                <div class="float-right">
+                    {{ $buku->links() }}
+                </div>
+
             </div>
         </div>
     </div>

@@ -16,6 +16,7 @@ class CreateKeranjangtmpsTable extends Migration
         Schema::create('keranjangtmps', function (Blueprint $table) {
             $table->increments('id_keranjang');
             $table->string('id_transaksi');
+            $table->string('id_member');
             $table->string('id_buku');
             $table->date('tgl');
             $table->integer('stok');

@@ -12,6 +12,8 @@ class Member extends Model
     protected $fillable = [
         'nama',
         'alamat',
+        'provinsi',
+        'kecamatan',
         'nohp',
         'email',
         'password',

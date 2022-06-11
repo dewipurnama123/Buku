@@ -17,7 +17,7 @@ Data User
                 </div>
             </div>
             <div class="card-body">
-                <table class="table table-striped">
+                <table class="table table-striped table-hover">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -29,7 +29,8 @@ Data User
                     <tbody>
                         @foreach($user as $i=> $isi)
                         <tr>
-                            <td>{{ $i + 1 }}</td>
+                            <td>{{$user->firstItem() +$i}}</td>
+                            <!-- <td>{{ $i + 1 }}</td> -->
                             <td>{{ $isi->username }}</td>
                             <td>{{ $isi->email }}</td>
                             <td>
@@ -40,6 +41,17 @@ Data User
                         @endforeach
                     </tbody>
                 </table>
+                <div class="float-left">
+                    Showing
+                    {{$user->firstItem()}}
+                    to
+                    {{$user->lastItem()}}
+                </div>
+
+                <div class="float-right">
+                    {{$user->links()}}
+                </div>
+
             </div>
         </div>
     </div>

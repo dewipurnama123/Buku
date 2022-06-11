@@ -24,12 +24,21 @@ Tambah Member
                                 <input type="text" name="alamat" class="form-control" value="{{ $member->alamat }}" placeholder="Alamat">
                             </div>
                             <div class="form-group">
-                                <label for="">Nohp</label>
-                                <input type="number" name="nohp" class="form-control" value="{{ $member->nohp }}" placeholder="Nohp">
+                                <label for="">Provinsi</label>
+                                <input type="text" name="provinsi" class="form-control" value="{{ $member->provinsi }}" placeholder="Provinsi">
                             </div>
+                            <div class="form-group">
+                                <label for="">Kecamatan</label>
+                                <input type="text" name="kecamatan" class="form-control" value="{{ $member->kecamatan }}" placeholder="Kecamatan">
+                            </div>
+
                         </div>
 
                         <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Nohp</label>
+                                <input type="number" name="nohp" class="form-control" value="{{ $member->nohp }}" placeholder="Nohp">
+                            </div>
                             <div class="form-group">
                                 <label for="">Email</label>
                                 <input type="text" name="email" class="form-control" value="{{ $member->email }}" placeholder="Email">
