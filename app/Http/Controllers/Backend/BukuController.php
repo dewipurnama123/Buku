@@ -16,7 +16,9 @@ class BukuController extends Controller
         // singkatan ddcadalah dump die
         //dd($data['buku']);
         ->join('kategoris', 'bukus.id_kategori','=','kategoris.id_kategori')
-        ->get();
+        // ->get();
+        //pagination
+        ->simplePaginate(5);
         return view('backend.page.buku', $data);
     }
     public function tambahbuku()

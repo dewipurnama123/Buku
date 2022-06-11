@@ -17,7 +17,7 @@ Data Transaksi
                 </div>
             </div>
             <div class="card-body">
-                <table class="table table-striped">
+                <table class="table table-striped table-hover">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -30,7 +30,8 @@ Data Transaksi
                     <tbody>
                         @foreach($transaksi as $i=> $isi)
                         <tr>
-                            <td>{{ $i + 1 }}</td>
+                            <td>{{$transaksi->firstItem() +$i}}</td>
+                            <!-- <td>{{ $i + 1 }}</td> -->
                             <td>{{ $isi->nama }}</td>
                             <td>{{ $isi->tgl }}</td>
                             <td>{{ $isi->invoice }}</td>
@@ -42,6 +43,15 @@ Data Transaksi
                         @endforeach
                     </tbody>
                 </table>
+                <div class="float-left">
+                    Showing
+                    {{$transaksi->firstItem()}}
+                    to
+                    {{$transaksi->lastItem()}}
+                </div>
+                <div class="float-right">
+                    {{$transaksi->links()}}
+                </div>
             </div>
         </div>
     </div>

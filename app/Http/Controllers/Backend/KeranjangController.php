@@ -14,28 +14,36 @@ class KeranjangController extends Controller
     {
         $data['keranjang'] = DB::table('keranjangs')
         // singkatan ddcadalah dump die
-        //dd($data['keranjang']);
-        ->join('transaksis', 'keranjangs.id_transaksi','=','transaksis.id_transaksi')
-        ->join('bukus', 'keranjangs.id_buku','=','bukus.id_buku')
-        ->get();
+        // dd($data['keranjang']);
+        ->join('transaksis', 'keranjangs.id_transaksi','transaksis.id_transaksi')
+        ->join('members', 'keranjangs.id_member','members.id_member')
+        ->join('bukus', 'keranjangs.id_buku','bukus.id_buku')
+        ->select('transaksis.id_transaksi','members.id_member','members.nama', 'bukus.id_buku', 'bukus.judul','keranjangs.tgl','keranjangs.stok','keranjangs.harga','keranjangs.quantity','keranjangs.total','keranjangs.ket','keranjangs.id_keranjang')
+        // ->get();
+        //pagination
+        ->simplePaginate(5);
+        // dd($data);
         return view('backend.page.keranjang', $data);
     }
     public function tambahkeranjang()
     {
         $data['transaksi']=DB::table('transaksis')->get();
+        $data['member']=DB::table('members')->get();
         $data['buku']=DB::table('bukus')->get();
         return view('backend.page.inputkeranjang', $data);
     }
     public function save(Request $r)
     {
+        // dd($r->all());
         $validator = Validator::make($r->all(), [
             'transaksi_privat'=> 'required',
+            'member_privat'=> 'required',
             'buku_privat'=> 'required',
             'tgl' => 'required',
             'stok' => 'required',
             'ket' => 'required',
-            'quantity' => 'required',
             'harga' => 'required',
+            'quantity' => 'required',
             'total' => 'required',
         ]);
 
@@ -47,12 +55,13 @@ class KeranjangController extends Controller
 
         $simpan = keranjang::insert([
             'id_transaksi' =>$r->transaksi_privat,
+            'id_member' =>$r->member_privat,
             'id_buku' =>$r->buku_privat,
-            'tgl' => $r->tgl,
+            'tgl' =>$r->tgl,
             'stok' => $r->stok,
             'ket' => $r->ket,
-            'quantity'=> $r->quantity,
             'harga' => $r->harga,
+            'quantity'=> $r->quantity,
             'total' => $r->total,
         ]);
 
@@ -66,6 +75,7 @@ class KeranjangController extends Controller
     {
         $data['keranjang'] = DB::table('keranjangs')->where('id_keranjang', $id)->first();
         $data['transaksi']=DB::table('transaksis')->get();
+        $data['member']=DB::table('members')->get();
         $data['buku']=DB::table('bukus')->get();
         return view('backend.page.editkeranjang', $data);
     }
@@ -74,12 +84,13 @@ class KeranjangController extends Controller
 
         $validator = Validator::make($r->all(), [
             'transaksi_privat'=> 'required',
+            'member_privat'=> 'required',
             'buku_privat'=> 'required',
             'tgl' => 'required',
             'stok' => 'required',
             'ket' => 'required',
-            'quantity' => 'required',
             'harga' => 'required',
+            'quantity' => 'required',
             'total' => 'required',
         ]);
 
@@ -90,12 +101,13 @@ class KeranjangController extends Controller
         }
         $simpan = Keranjang::where('id_keranjang', $id)->update([
             'id_transaksi' =>$r->transaksi_privat,
+            'id_member' =>$r->member_privat,
             'id_buku' =>$r->buku_privat,
             'tgl' => $r->tgl,
             'stok' => $r->stok,
             'ket' => $r->ket,
-            'quantity'=> $r->quantity,
             'harga' => $r->harga,
+            'quantity'=> $r->quantity,
             'total' => $r->total
         ]);
 
@@ -123,11 +135,11 @@ class KeranjangController extends Controller
         $buku= DB::table('bukus')
         ->where('bukus.id_buku',$id_buku)
         ->first();
-        // dd($buku);
         $data =[
             'message' => 'ok',
             'data'=> $buku,
         ];
         return response()->json ($data);
     }
+
 }

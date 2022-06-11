@@ -17,12 +17,14 @@ Data Member
                 </div>
             </div>
             <div class="card-body">
-                <table class="table table-striped">
+                <table class="table table-striped table-hover">
                     <thead>
                         <tr>
                             <th>No</th>
                             <th>Nama</th>
                             <th>Alamat</th>
+                            <th>Provinsi</th>
+                            <th>Kecamatan</th>
                             <th>Nohp</th>
                             <th>Email</th>
                             <th>Aksi</th>
@@ -31,9 +33,12 @@ Data Member
                     <tbody>
                         @foreach($member as $i=> $isi)
                         <tr>
-                            <td>{{ $i + 1 }}</td>
+                            <td>{{$member->firstItem() +$i}}</td>
+                            <!-- <td>{{ $i + 1 }}</td> -->
                             <td>{{ $isi->nama }}</td>
                             <td>{{ $isi->alamat }}</td>
+                            <td>{{ $isi->provinsi }}</td>
+                            <td>{{ $isi->kecamatan }}</td>
                             <td>{{ $isi->nohp }}</td>
                             <td>{{ $isi->email }}</td>
                             <td>
@@ -44,6 +49,15 @@ Data Member
                         @endforeach
                     </tbody>
                 </table>
+                <div class="float-left">
+                    Showing
+                    {{$member->firstItem()}}
+                    to
+                    {{$member->lastItem()}}
+                </div>
+                <div class="float-right">
+                    {{$member->links()}}
+                </div>
             </div>
         </div>
     </div>

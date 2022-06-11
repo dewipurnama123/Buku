@@ -17,6 +17,8 @@ class CreateMembersTable extends Migration
             $table->id();
             $table->string('nama');
             $table->string('alamat');
+            $table->string('provinsi');
+            $table->string('kecamatan');
             $table->string('nohp');
             $table->string('email');
             $table->string('password');

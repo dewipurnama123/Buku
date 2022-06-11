@@ -12,7 +12,10 @@ class UserController extends Controller
 {
     public function index()
     {
-        $data['user'] = DB::table('users')->get();
+        $data['user'] = DB::table('users')
+        // ->get();
+        //pagination
+        ->simplePaginate(2);
         // singkatan ddcadalah dump die
         //dd($data['user']);
         return view('backend.page.user', $data);
@@ -86,7 +89,4 @@ class UserController extends Controller
             return redirect('input-user')->with('error', 'Data gagal dihapus');
         }
     }
-class UserController extends Controller
-{
-    //
 }

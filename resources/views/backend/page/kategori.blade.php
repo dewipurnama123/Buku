@@ -17,7 +17,7 @@ Data Kategori
                 </div>
             </div>
             <div class="card-body">
-                <table class="table table-striped">
+                <table class="table table-striped table-hover">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -28,7 +28,8 @@ Data Kategori
                     <tbody>
                         @foreach($kategori as $i=> $isi)
                         <tr>
-                            <td>{{ $i + 1 }}</td>
+                            <td>{{$kategori->firstItem() +$i}}</td>
+                            <!-- <td>{{ $i + 1 }}</td> -->
                             <td>{{ $isi->nama_kategori }}</td>
                             <td>
                                 <a href="{{ route('edit-kategori',$isi->id_kategori) }}" class="btn btn-success"> <i class="fa fa-edit"></i>Edit</a>
@@ -38,6 +39,15 @@ Data Kategori
                         @endforeach
                     </tbody>
                 </table>
+                <div class="float-left">
+                    Showing
+                    {{$kategori->firstItem()}}
+                    to
+                    {{$kategori->lastItem()}}
+                </div>
+                <div class="float-right">
+                    {{$kategori-> links()}}
+                </div>
             </div>
         </div>
     </div>

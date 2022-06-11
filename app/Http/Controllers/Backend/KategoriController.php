@@ -12,7 +12,10 @@ class KategoriController extends Controller
 {
     public function index()
     {
-        $data['kategori'] = DB::table('kategoris')->get();
+        $data['kategori'] = DB::table('kategoris')
+        // ->get();
+        //pagination
+        ->simplePaginate(3);
         // singkatan ddcadalah dump die
         //dd($data['kategori']);
         return view('backend.page.kategori', $data);

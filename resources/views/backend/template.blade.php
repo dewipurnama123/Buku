@@ -23,13 +23,13 @@
 </head>
 
 <body id="page-top">
+    <script src="{{ asset('/')}}backend/vendor/jquery/jquery.min.js"></script>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
 
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
@@ -53,89 +53,56 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
+                Data Toko Buku
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Backend</span>
+                <a class="nav-link collapsed" href="{{route('user')}}">
+                    <i class="fas fa-fw fa-user"></i>
+                    <span>User</span>
+
                 </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Backend:</h6>
-                        <a class="collapse-item" href="{{route('user')}}">Data User</a>
-                        <a class="collapse-item" href="{{route('kategori')}}">Data Kategori</a>
-                        <a class="collapse-item" href="{{route('member')}}">Data Member</a>
-                        <a class="collapse-item" href="{{route('buku')}}">Data Buku</a>
-                        <a class="collapse-item" href="{{route('transaksi')}}">Data Transaksi</a>
-                        <a class="collapse-item" href="{{route('keranjang')}}">Data Keranjang</a>
-                    </div>
-                </div>
             </li>
 
-            <!-- Nav Item - Utilities Collapse Menu -->
+            <!-- Nav Item - Kategori Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Utilities</span>
+                <a class="nav-link collapsed" href="{{route('kategori')}}" >
+                    <i class="fas fa-fw fa-list-alt"></i>
+                    <span>Kategori</span>
                 </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Colors</a>
-                        <a class="collapse-item" href="utilities-border.html">Borders</a>
-                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                        <a class="collapse-item" href="utilities-other.html">Other</a>
-                    </div>
-                </div>
             </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Addons
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
+            <!-- Nav Item - Member Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
+                <a class="nav-link collapsed" href="{{route('member')}}" >
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Member</span>
                 </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Login Screens:</h6>
-                        <a class="collapse-item" href="login.html">Login</a>
-                        <a class="collapse-item" href="register.html">Register</a>
-                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="404.html">404 Page</a>
-                        <a class="collapse-item" href="blank.html">Blank Page</a>
-                    </div>
-                </div>
             </li>
 
-            <!-- Nav Item - Charts -->
+            <!-- Nav Item - Buku Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
+                <a class="nav-link collapsed" href="{{route('buku')}}" >
+                    <i class="fas fa-fw fa-book"></i>
+                    <span>Buku</span>
+                </a>
             </li>
 
-            <!-- Nav Item - Tables -->
+            <!-- Nav Item - Transaksi Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
+                <a class="nav-link collapsed" href="{{route('transaksi')}}" >
+                    <i class="fas fa-fw fa-money-check-alt"></i>
+                    <span>Transaksi</span>
+                </a>
+            </li>
+
+              <!-- Nav Item - Keranjang Collapse Menu -->
+              <li class="nav-item">
+                <a class="nav-link collapsed" href="{{route('keranjang')}}" >
+                    <i class="fas fa-fw fa-shopping-cart"></i>
+                    <span>keranjang</span>
+                </a>
             </li>
 
             <!-- Divider -->
@@ -175,7 +142,7 @@
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->username}}</span>
-                            <img class="img-profile rounded-circle" src="img/anime3.jpg">
+                            <img class="img-profile rounded-circle" src="backend/gambar/anime3.jpg">
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -279,7 +246,6 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="{{ asset('/')}}backend/vendor/jquery/jquery.min.js"></script>
     <script src="{{ asset('/')}}backend/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
@@ -288,7 +254,9 @@
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('/')}}backend/js/sb-admin-2.min.js"></script>
 
+     <!-- Page level plugins -->
+     <script src="{{ asset('/')}}backend/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="{{ asset('/')}}backend/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
 </body>
-
 </html>

@@ -31,8 +31,23 @@ Tambah Keranjang
                                 @enderror
                             </div>
                             <div class="form-group">
+                                <label for="">Member</label>
+                                <select name="member_privat" id="member_privat" class="form-control" id="">
+                                    <option value="" disabled selected>Select Member</option>
+                                    @foreach ($member as $item)
+                                        <option value="{{$item->id_member}}">{{$item->nama}}</option>
+                                    @endforeach
+                                    <script>
+                                        document.getElementById('member_privat').value = '{{$keranjang->id_member}}'
+                                    </script>
+                                </select>
+                                @error('member_privat')
+                                    <i class="text-danger">{{$message}}</i>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <label for="">Buku</label>
-                                <select name="buku_privat" id="buku_privat" class="form-control" id="">
+                                <select onchange="getdata()" name="buku_privat" id="buku_privat" class="form-control" id="">
                                     <option value="" disabled selected>Select Buku</option>
                                     @foreach ($buku as $item)
                                         <option value="{{$item->id_buku}}">{{$item->judul}}</option>
@@ -47,21 +62,21 @@ Tambah Keranjang
                             </div>
                             <div class="form-group">
                                 <label for="">Tanggal</label>
-                                <input type="date" name="tgl" class="form-control" value="{{ $keranjang->tgl }}" placeholder="Tanggal">
+                                <input type="date" name="tgl" class="form-control" value="{{ $keranjang->tgl }}" placeholder="Tgl">
                             </div>
                             <div class="form-group">
                                 <label for="">Stok</label>
-                                <input type="integer" name="stok" class="form-control" value="{{ $keranjang->stok }}" placeholder="Stok">
+                                <input type="integer" name="stok" id="stok_privat" class="form-control" value="{{ $keranjang->stok }}" placeholder="Stok">
                             </div>
                         </div>
                         <div class="col-md-6">
-                        <div class="form-group">
-                                <label for="">Quantity</label>
-                                <input type="integer" name="quantity" id="quantity"  value="{{ $keranjang->quantity}}" class="form-control" placeholder="Quantity">
-                            </div>
                             <div class="form-group">
                                 <label for="">Harga</label>
                                 <input type="float" name="harga" id="harga_privat"  value="{{ $keranjang->harga}}" class="form-control" placeholder="Harga">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Quantity</label>
+                                <input type="integer" name="quantity" id="quantity_privat"  value="{{ $keranjang->quantity}}" class="form-control" placeholder="Quantity">
                             </div>
                             <div class="form-group">
                                 <label for="">Total</label>
@@ -81,4 +96,44 @@ Tambah Keranjang
         </div>
     </div>
 </div>
+<script>
+    function getdata() {
+        var buku = $('#buku_privat option:selected').val();
+        console.log(buku)
+        // alert(buku_privat)
+        $.ajax({
+            url: '{{ route("data") }}',
+                type: 'POST',
+                dataType: 'JSON',
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    buku: buku,
+                },
+        })
+            .done(function (response) {
+                if (response.message == 'ok') {
+                    $('#stok_privat').val(response.data.stok);
+                    $('#harga_privat').val(response.data.harga);
+                }
+            })
+            .fail(function () {
+                console.log("error");
+            })
+            }
+    </script>
+    <script>
+        // window.print()
+        $('#quantity_privat').keyup(function(){
+            var quantity = $('#quantity_privat').val();
+            var harga = $('#harga_privat').val();
+            console.log(harga,quantity);
+            //alert(harga)
+            if (harga == '') {
+                alert("Pilih harga")
+            }else{
+                var total1 = parseInt(quantity)* parseInt (harga);
+                $('#total').val(total1);
+            }
+        })
+    </script>
 @endsection

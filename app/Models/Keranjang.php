@@ -11,6 +11,7 @@ class Keranjang extends Model
     protected $table = 'keranjangs';
     protected $fillable = [
         'id_transaksi',
+        'id_member',
         'id_buku',
         'tgl',
         'stok',
