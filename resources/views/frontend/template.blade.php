@@ -181,7 +181,7 @@
 				<div class="navy">
 					<ul>
 						<!-- Main menu -->
-						<li><a href="#">Home</a>
+						<li><a href="{{route('home')}}">Home</a>
 							<!-- Submenu -->
 							
 						</li>
