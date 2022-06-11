@@ -54,7 +54,7 @@
 									<td>
 										<div class="form-inline">
 											<a href="{{ route('qtykurang',[$isi->id_keranjang,$isi->id_buku])}}" class="btn btn-danger">-</a>
-											<input type="number" class="form-control" style="width:50px" step="1" name="qty" value="{{$isi->qty}}" title="Qty" class="input-text qty text" size="4" min="1">
+											<input readonly type="number" class="form-control" style="width:50px" step="1" name="qty" value="{{$isi->qty}}" title="Qty" class="input-text qty text" size="4" min="1">
 											<a href="{{ route('qtytambah',[$isi->id_keranjang,$isi->id_buku])}}" class="btn btn-success">+</a>
 										</div>
 									</td>
