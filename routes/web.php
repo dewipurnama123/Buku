@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\Backend\Logincontroller;
 use App\Http\Controllers\Backend\Usercontroller;
 use App\Http\Controllers\Backend\Kategoricontroller;
@@ -11,6 +12,10 @@ use App\Http\Controllers\Backend\Keranjangcontroller;
 use App\Http\Controllers\Backend\Homecontroller;
 use App\Http\Controllers\Backend\GetApi;
 use App\Http\Controllers\Frontend\Homecontroller as HomeControllerF;
+use App\Http\Controllers\Frontend\Logincontroller as LogincontrollerF;
+use App\Http\Controllers\Frontend\Membercontroller as MembercontrollerF;
+use App\Http\Controllers\Frontend\Transcontroller as TranscontrollerF;
+use App\Http\Controllers\Frontend\PembayaranController as PembayarancontrollerF;
 
 
 /*
@@ -28,8 +33,47 @@ Route::get('/admin', [Homecontroller::class, 'index'])->name('admin');
 
 
 // frontend
-Route::get('/',[HomeControllerF::class, 'index'])->name('home') ;
-Route::get('kategori/{id}',[HomeControllerF::class, 'kategori'])->name('kategori') ;
+if(Auth::user() == null)
+{
+    Route::get('/',[HomeControllerF::class, 'index'])->name('home') ;
+    Route::get('kategori/{id}',[HomeControllerF::class, 'kategoriF'])->name('kategoriF') ;
+    Route::get('detail/{id}',[HomeControllerF::class, 'detail'])->name('detail') ;
+    Route::get('about',[HomeControllerF::class, 'about'])->name('about') ;
+}else{
+    Route::group(['middleware' => ['web', 'auth:member']], function (){
+        Route::get('/admin', [Homecontroller::class, 'index'])->name('admin');
+        Route::get('kategori/{id}',[HomeControllerF::class, 'kategoriF'])->name('kategoriF') ;
+        Route::get('detail/{id}',[HomeControllerF::class, 'detail'])->name('detail') ;
+        Route::get('about',[HomeControllerF::class, 'about'])->name('about') ;
+    });
+}
+
+
+Route::group(['middleware' => 'guest:member'], function (){
+    Route::get('loginf',[LogincontrollerF::class, 'loginf'])->name('loginf') ;
+    Route::post('aksiloginf', [LogincontrollerF::class, 'aksiloginf'])->name('aksiloginf');
+    Route::get('registerf', [LogincontrollerF::class, 'registerf'])->name('registerf');
+    Route::post('daftarf',  [LogincontrollerF::class, 'daftarf'])->name('daftarf');
+    
+});
+Route::group(['middleware' => ['web', 'auth:member']], function (){   
+    
+    Route::get('cart',[TransControllerF::class, 'cart'])->name('cart') ;
+    Route::get('cart1',[TransControllerF::class, 'cart1'])->name('cart1') ;
+    Route::post('simpan-cart',[TransControllerF::class, 'keranjang'])->name('simpan-cart') ;
+    Route::get('hapus-cart/{id}',[TransControllerF::class, 'hapus'])->name('hapus-cart') ;
+    
+    Route::get('qtytambah/{id_keranjang}/{id_buku}',[TransControllerF::class, 'qtytambah'])->name('qtytambah') ;
+    Route::get('qtykurang/{id_keranjang}/{id_buku}',[TransControllerF::class, 'qtykurang'])->name('qtykurang') ;
+    
+    Route::get('wishlist',[HomeControllerF::class, 'wishlist'])->name('wishlist') ;
+    Route::post('simpan-wish',[HomeControllerF::class, 'wish'])->name('simpan-wish') ;
+    Route::get('hapus-wish/{id}',[HomeControllerF::class, 'hapus'])->name('hapus-wish') ;
+    
+    Route::get('pembayaran',[PembayaranControllerF::class, 'index'])->name('pembayaran') ;
+    
+});
+Route::post('logoutf', [LogincontrollerF::class, 'logoutf'])->name('logoutf');
 
 Route::group(['middleware' => 'guest:login'], function (){
     Route::get('login', [Logincontroller::class, 'login'])->name('login');

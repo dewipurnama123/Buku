@@ -14,7 +14,7 @@ class CreateMembersTable extends Migration
     public function up()
     {
         Schema::create('members', function (Blueprint $table) {
-            $table->increments('id_member');
+            $table->id();
             $table->string('nama');
             $table->string('alamat');
             $table->string('provinsi');
@@ -22,6 +22,7 @@ class CreateMembersTable extends Migration
             $table->string('nohp');
             $table->string('email');
             $table->string('password');
+            $table-> rememberToken();
             $table->timestamps();
         });
     }
