@@ -51,25 +51,14 @@ if(Auth::user() == null)
 
 
 Route::group(['middleware' => 'guest:member'], function (){
-<<<<<<< HEAD
     Route::get('loginf',[LogincontrollerF::class, 'loginf'])->name('loginf') ;
     Route::post('aksiloginf', [LogincontrollerF::class, 'aksiloginf'])->name('aksiloginf');
     Route::get('registerf', [LogincontrollerF::class, 'registerf'])->name('registerf');
     Route::post('daftarf',  [LogincontrollerF::class, 'daftarf'])->name('daftarf');
 
 });
+
 Route::group(['middleware' => ['web', 'auth:member']], function (){
-
-=======
-    Route::get('/loginf',[LoginControllerF::class, 'loginf'])->name('loginf') ;
-    Route::post('aksiloginf', [LoginControllerF::class, 'aksiloginf'])->name('aksiloginf');
-    Route::get('registerf', [LoginControllerF::class, 'registerf'])->name('registerf');
-    Route::post('daftarf',  [LoginControllerF::class, 'daftarf'])->name('daftarf');
-    
-});
-
-Route::group(['middleware' => ['web', 'auth:member']], function (){   
->>>>>>> b79f839ca49a842dc76beaee32c5853b14403071
     Route::get('cart',[TransControllerF::class, 'cart'])->name('cart') ;
     Route::get('cart1',[TransControllerF::class, 'cart1'])->name('cart1') ;
     Route::post('simpan-cart',[TransControllerF::class, 'keranjang'])->name('simpan-cart') ;
