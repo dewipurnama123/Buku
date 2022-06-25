@@ -12,6 +12,8 @@ class Member extends Model
     protected $primary = 'id_member';
     protected $fillable = [
         'nama',
+        'province_id',
+        'city_id',
         'alamat',
         'provinsi',
         'kecamatan',

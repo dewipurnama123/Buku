@@ -25,6 +25,75 @@ class PembayaranController extends Controller
         return view ('frontend.page.pembayaran',$data);
     
     }
+    public function get_snap_token(Request $request)
+    {
+        // Set your Merchant Server Key
+        \Midtrans\Config::$serverKey = 'SB-Mid-server-iZPVqYQm-QFKIVAR8HKEbuwP';
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        \Midtrans\Config::$isProduction = false;
+        // Set sanitization on (default)
+        \Midtrans\Config::$isSanitized = true;
+        // Set 3DS transaction for credit card to true
+        \Midtrans\Config::$is3ds = true;
+
+        $user = DB::table('members')->where('id', $request->id)->first();
+
+        $params = array(
+            'transaction_details' => array(
+                'order_id' => 'INV'.time(),
+                'gross_amount' => $request->tot_bayar,
+            ),
+            'customer_details' => array(
+                'first_name' => $user->nama,
+                'email' => $user->email,
+                'phone' => $user->nohp,
+            ),
+        );
+
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+        // dd($snapToken);
+    
+        $data = [
+            'status' => 'ok',
+            'snaptoken' => $snapToken,
+        ];
+        return response()->json($data);
+    }
+    public function send_result_midtrans(Request $request)
+    {
+        $id= Auth::user()->id;
+        $city = DB::table('cities')->where('city_id', Auth::user()->city_destination)->first();
+        $tujuan=$city->name;
+        $json = json_decode($request->json);
+        $asal="Tanggerang";
+        // dd($json);
+        $simpan = DB::table('tb_transaksis')->insert([
+            'id'=>$id,
+            'total_bayar'=>$json->gross_amount,
+            'invoice'=>$json->order_id,
+            'asal'=>$asal,
+            'tujuan'=>$tujuan,
+            // 'kurir'=>$request->courier,
+            'ongkir'=>$request->hasil_ongkir,
+            'status_code' => $json->status_code,
+            'status_message' => $json->status_message,
+            'transaction_id' => $json->transaction_id,
+            'payment_type' => $json->payment_type,
+            'transaction_time' => $json->transaction_time,
+            'transaction_status'=>$json->transaction_status,
+            'fraud_status' =>$json->fraud_status,
+            // 'bill_key'=>$json->bill_key,
+            // 'biller_code'=>$json->biller_code,
+            // 'pdf_url'=>$json->pdf_url,
+            // 'finish_redirect_url'=>$json->finish_redirect_url,
+        ]);
+        // dd($simpan);
+        if($simpan==TRUE){
+            return redirect('cart')->with('Success','Permintaan Anda sedang di proses');
+        }else{
+            return redirect('penjualan')->with('Error','Permintaan Gagal');
+        }
+    }
 
    
 }

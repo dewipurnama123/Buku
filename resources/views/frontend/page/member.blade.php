@@ -25,18 +25,18 @@
 			
 
 				<div class="col-md-12">
-                <form class="user" action="{{route('daftarf')}}" method="post">
+                <form class="user" action="{{route('updatemember',$member->id)}}" method="post">
                                 @csrf
 <center>
 						<h3 class="nomargin" >Sign Up</h3>
                         </center>
                         <div class="mb10">
 							<label class="control-label">Username</label>
-                            <input type="username" class="form-control" name="username" placeholder="Username">
+                            <input value="{{$member->username}}" type="username" class="form-control" name="username" placeholder="Username">
 						</div>
                         <div class="mb10">
 							<label class="control-label">Nama Lengkap</label>
-                            <input type="text" class="form-control" name="nama" placeholder="Nama Lengkap">
+                            <input value="{{$member->nama}}" type="text" class="form-control" name="nama" placeholder="Nama Lengkap">
 						</div>
                         
 						<div class="mb10">
@@ -62,27 +62,25 @@
 						</div>
                         <div class="mb10">
 							<label class="control-label">No Handphone</label>
-                            <input type="text" class="form-control" name="nohp" placeholder="No Handphone">
+                            <input value="{{$member->nohp}}" type="text" class="form-control" name="nohp" placeholder="No Handphone">
 
 						</div>
                         <div class="mb10">
 							<label class="control-label">Email</label>
-                            <input type="email" class="form-control" name="email" placeholder="Email">
+                            <input value="{{$member->email}}" type="email" class="form-control" name="email" placeholder="Email">
 
 						</div>
 						<div class="mb10">
 							<label class="control-label">Password</label>
-                            <input type="password" class="form-control" name="password" placeholder="Password">
+                            <input value="{{$member->password}}" type="password" class="form-control" name="password" placeholder="Password">
 						</div>
 					
 
 						<br />
                         <button type="submit" class="btn btn-primary btn-user btn-block">
-                                    Register Account
+                                    Update
                                 </button>
-                                <center>
-						<p class="mt5 mb20">Already a member? <a href="{{route('loginf')}}"><strong>Sign In</strong></a></p>
-                        </center>
+                             
 					</form>
 				</div><!-- col-sm-6 -->
 

@@ -43,20 +43,26 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('/')}}frontend/css/revolutionslider_settings.css" media="screen" />
 	<link rel="stylesheet" href="{{asset('/')}}frontend/css/responsive.css">
 	<script src="{{asset('/')}}frontend/js/vendor/modernizr-2.6.2.min.js"></script>
+
+  <!-- Required Raja Ongkir -->
+ 
 </head>
 
 <body class="style-14 index-2">
+<script src="{{asset('/')}}frontend/js/vendor/jquery-1.10.2.min.js"></script>
+
+
 <!--[if lt IE 7]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
 
 
 <!-- Start Loading -->
-<section class="loading-overlay">
+<!-- <section class="loading-overlay">
 	<div class="Loading-Page">
 		<h1 class="loader">Loading...</h1>
 	</div>
-</section> 
+</section>  -->
 <!-- End Loading  -->
 
 <!-- start header -->
@@ -107,7 +113,7 @@
 					</ul>
 					@endforeach
 
-					<a href="{{route('cart')}}" class="btn btn-white btn-sm">View Cart</a> &nbsp; <a href="#" class="btn btn-color btn-sm">Checkout</a>
+					<a href="{{route('cart')}}" class="btn btn-color btn-sm">View Cart</a> 
 				</div>
 			</div>
 			<!-- Shopping kart ends -->
@@ -182,7 +188,7 @@
 					<ul>
 						<!-- Main menu -->
 
-						<li><a href="{{ route('home')}}">Home 1</a>
+						<li><a href="{{ route('home')}}">Home</a>
 
 							<!-- Submenu -->
 							
@@ -200,9 +206,10 @@
 					
 						<li><a href="#">Member</a>
 							<ul>
-							@if(session('id_member') != '')
-							<li><a href="#" role="button" onclick="logouts()">Logout</a></li>		
-							@else
+							
+								@if(session('id_member') != '')
+								<li><a href="#" role="button" onclick="logouts()">Logout</a></li>		
+								@else
 							<li><a href="{{ route('loginf')}}">Login</a></li>
 							<li><a href="{{ route('registerf')}}">Daftar</a></li>
 							@endif
@@ -214,10 +221,10 @@
 						<li><a href="#">Transaksi</a>
 							<ul>
 								<li><a href="{{ route('cart')}}"><span>Keranjang</span></a></li>
-								<li><a href="single-product.html"><span>Transaksi</span></a></li>
+								<li><a href="{{ route('trans')}}"><span>Transaksi</span></a></li>
 								<li><a href="{{ route('wishlist')}}"><span>Wishlist</span></a></li>
 								<li><a href="{{ route('pembayaran')}}"><span>Status Pembayaran</span></a></li>
-								<li><a href="{{ route('wishlist')}}"><span>Status Pengiriman</span></a></li>
+								<li><a href=""><span>Status Pengiriman</span></a></li>
 								
 							</ul>
 						</li>
@@ -225,7 +232,7 @@
 						<li><a href="{{ route('about')}}">About </a></li>
 						<li><a href="{{ route('login')}}">Admin</a></li>
 					</ul>
-				
+					
 				</div>
 			</div>
 		</div>
@@ -365,7 +372,13 @@
 
 
 <!-- All script -->
-<script src="{{asset('/')}}frontend/js/vendor/jquery-1.10.2.min.js"></script>
+
+<!-- Raja Ongkir -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+
 <script src="{{asset('/')}}frontend/js/bootstrap.min.js"></script>
 <script src="{{asset('/')}}frontend/js/smoothscroll.js"></script>
 <!-- Scroll up js
@@ -390,6 +403,7 @@
 <!-- Owl carousel -->
 <script src="{{asset('/')}}frontend/js/owl.carousel.min.js"></script>
 <script src="{{asset('/')}}frontend/js/main.js"></script>
+
 
 <script type="text/javascript">
 

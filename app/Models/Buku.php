@@ -17,5 +17,6 @@ class Buku extends Model
         'tahun',
         'harga',
         'stok',
+        'berat'
     ];
 }
