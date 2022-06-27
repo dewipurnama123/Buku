@@ -2,7 +2,7 @@
 
 @section('main')
 <!-- start main content -->
-
+ 
 <section class="product_content_area pt-40">
 	<!-- start of page content -->
 

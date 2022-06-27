@@ -34,16 +34,16 @@ Data Member
                         @foreach($member as $i=> $isi)
                         <tr>
                             <td>{{$member->firstItem() +$i}}</td>
-                            <!-- <td>{{ $i + 1 }}</td> -->
+                            <!-- <td>{{ $i + 1 }}</td>
                             <td>{{ $isi->nama }}</td>
-                            <td>{{ $isi->provinsi_id }}</td>
+                            <td>{{ $isi->province_id }}</td>
                             <td>{{ $isi->city_id }}</td>
                             <td>{{ $isi->alamat }}</td>
                             <td>{{ $isi->nohp }}</td>
                             <td>{{ $isi->email }}</td>
                             <td>
-                                <a href="{{ route('edit-member',$isi->id_member) }}" class="btn btn-success"> <i class="fa fa-edit"></i>Edit</a>
-                                <a href="{{ route('hapus-member',$isi->id_member)}}" class="btn btn-danger"> <i class="fa fa-trash"></i>Hapus</a>
+                                <a href="{{ route('edit-member',$isi->id) }}" class="btn btn-success"> <i class="fa fa-edit"></i>Edit</a>
+                                <a href="{{ route('hapus-member',$isi->id)}}" class="btn btn-danger"> <i class="fa fa-trash"></i>Hapus</a>
                             </td>
                         </tr>
                         @endforeach

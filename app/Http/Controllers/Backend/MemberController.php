@@ -29,9 +29,10 @@ class MemberController extends Controller
     {
         $validator = Validator::make($r->all(), [
             'nama' => 'required',
+            'username' => 'required',
             'alamat' => 'required',
-            'provinsi' => 'required',
-            'kecamatan' => 'required',
+            'province_id' => 'required',
+            'city_id' => 'required',
             'nohp' => 'required',
             'email' => 'required',
             'password' => 'required',
@@ -43,13 +44,14 @@ class MemberController extends Controller
                 ->withInput();
         }
         $simpan = Member::insert([
+            'username' => $r->username,
             'nama' => $r->nama,
+            'province_id'=> $r->province_id,
+            'city_id'=> $r->city_id,
             'alamat' => $r->alamat,
-            'provinsi'=> $r->provinsi,
-            'kecamatan'=> $r->kecamatan,
             'nohp' => $r->nohp,
             'email' => $r->email,
-            'password' => $r->password,
+            'password' => $r->password
         ]);
 
         if ($simpan == TRUE) {
@@ -60,16 +62,17 @@ class MemberController extends Controller
     }
     public function editmember($id)
     {
-        $data['member'] = DB::table('members')->where('id_member', $id)->first();
+        $data['member'] = DB::table('members')->where('id', $id)->first();
         return view('backend.page.editmember', $data);
     }
     public function updatemember(Request $r, $id)
     {
         $validator = Validator::make($r->all(), [
             'nama' => 'required',
+            'username' => 'required',
             'alamat' => 'required',
-            'provinsi' => 'required',
-            'kecamatan' => 'required',
+            'province_id' => 'required',
+            'city_id' => 'required',
             'nohp' => 'required',
             'email' => 'required',
             'password' => 'required',
@@ -80,11 +83,12 @@ class MemberController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-        $simpan = Member::where('id_member', $id)->update([
+        $simpan = Member::where('id', $id)->update([
+            'username' => $r->username,
             'nama' => $r->nama,
+            'province_id'=> $r->province_id,
+            'city_id'=> $r->city_id,
             'alamat' => $r->alamat,
-            'provinsi'=> $r->provinsi,
-            'kecamatan'=> $r->kecamatan,
             'nohp' => $r->nohp,
             'email' => $r->email,
             'password' => $r->password
@@ -98,7 +102,7 @@ class MemberController extends Controller
 
     public function hapusmember($id)
     {
-        $deleted = DB::table('members')->where('id_member',$id)->delete();
+        $deleted = DB::table('members')->where('id',$id)->delete();
 
         if ($deleted == TRUE) {
             return redirect('member')->with('success', 'Data berhasil dihapus');

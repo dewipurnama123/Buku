@@ -15,25 +15,30 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
+
+                                <div class="form-group">
+                                    <label for="">Username</label>
+                                    <input type="text" name="username" class="form-control" placeholder="Username">
+                                </div>
                                 <div class="form-group">
                                     <label for="">Nama</label>
                                     <input type="text" name="nama" class="form-control" placeholder="Nama">
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Alamat</label>
-                                    <input type="text" name="alamat" class="form-control" placeholder="Alamat">
-                                </div>
-                                <div class="form-group">
                                     <label for="">Provinsi</label>
-                                    <input type="text" name="provinsi" class="form-control" placeholder="Provinsi">
+                                    <input type="text" name="province_id" class="form-control" placeholder="Provinsi">
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Kecamatan</label>
-                                    <input type="text" name="kecamatan" class="form-control" placeholder="Kecamatan">
+                                    <label for="">Kota</label>
+                                    <input type="text" name="city_id" class="form-control" placeholder="Kota">
                                 </div>
                             </div>
 
                             <div class="col-md-6">
+                            <div class="form-group">
+                                    <label for="">Alamat</label>
+                                    <input type="text" name="alamat" class="form-control" placeholder="Alamat">
+                                </div>
                                 <div class="form-group">
                                     <label for="">Nohp</label>
                                     <input type="number" name="nohp" class="form-control" placeholder="Nohp">

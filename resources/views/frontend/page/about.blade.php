@@ -21,7 +21,8 @@
     <div class="col-lg-6">
       <!-- <form action="" method="post" class="php-email-form"> -->
         <div class= "row gy-4">
-<p>Bila Anda masih memiliki pertanyaan, jangan sungkan hubungi kami. Silakan isi formulir di bawah ini atau hubungi kami melalui Whatsapp.</p>
+          <p>Bila Anda masih memiliki pertanyaan, jangan sungkan hubungi kami. Silakan isi formulir di bawah ini atau hubungi kami melalui Whatsapp.
+          </p>
           <div class="col-md-6">
             <input type="text" name="name" class="form-control" id="nama" placeholder="Nama Anda" required>
           </div>

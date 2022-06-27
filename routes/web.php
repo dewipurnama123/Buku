@@ -39,9 +39,7 @@ if(Auth::user() == null)
     Route::get('kategori/{id}',[HomeControllerF::class, 'kategoriF'])->name('kategoriF') ;
     Route::get('detail/{id}',[HomeControllerF::class, 'detail'])->name('detail') ;
     Route::get('about',[HomeControllerF::class, 'about'])->name('about') ;
-
     Route::post('send-result-midtrans', [PembayaranControllerF::class, 'send_result_midtrans'])->name('send.result.midtrans');
-    
 }else{
     Route::group(['middleware' => ['web', 'auth:member']], function (){
         Route::get('home',[HomeControllerF::class, 'index'])->name('home/') ;
@@ -53,12 +51,14 @@ if(Auth::user() == null)
 }
 
 Route::group(['middleware' => 'guest:member'], function (){
+    Route::get('loginf',[LogincontrollerF::class, 'loginf'])->name('loginf') ;
+    Route::post('aksiloginf', [LogincontrollerF::class, 'aksiloginf'])->name('aksiloginf');
+    Route::get('registerf', [LogincontrollerF::class, 'registerf'])->name('registerf');
+    Route::post('daftarf',  [LogincontrollerF::class, 'daftarf'])->name('daftarf');
     Route::get('loginf',[LoginControllerF::class, 'loginf'])->name('loginf') ;
     Route::post('aksiloginf', [LoginControllerF::class, 'aksiloginf'])->name('aksiloginf');
     Route::post('daftarf',  [LoginControllerF::class, 'daftarf'])->name('daftarf');
     Route::get('registerf', [LoginControllerF::class, 'registerf'])->name('registerf');
-    
-    
 });
 Route::get('citiesf/{province_id}',[LoginControllerF::class, 'getCitiesf'])->name('citiesf') ;
 
@@ -66,29 +66,27 @@ Route::get('ongkir',[CheckOngkirController::class, 'index'])->name('ongkir') ;
 Route::post('ongkir',[CheckOngkirController::class, 'check_ongkir'])->name('ongkir') ;
 Route::get('cities/{province_id}',[CheckOngkirController::class, 'getCities'])->name('ongkir') ;
 
-Route::group(['middleware' => ['web', 'auth:member']], function (){   
+Route::group(['middleware' => ['web', 'auth:member']], function (){
     Route::get('cart',[TransControllerF::class, 'cart'])->name('cart') ;
     Route::post('cart',[TransControllerF::class, 'check_ongkir'])->name('cart') ;
     Route::post('simpan-trans',[TransControllerF::class, 'save'])->name('simpan-trans') ;
     Route::get('trans',[TransControllerF::class, 'transaksi'])->name('trans') ;
     Route::get('dettrans/{id}',[TransControllerF::class, 'dettrans'])->name('dettrans') ;
-  
     Route::get('cart1',[TransControllerF::class, 'cart1'])->name('cart1') ;
     Route::post('simpan-cart',[TransControllerF::class, 'keranjang'])->name('simpan-cart') ;
     Route::get('hapus-cart/{id}',[TransControllerF::class, 'hapus'])->name('hapus-cart') ;
-    
+
     Route::get('qtytambah/{id_keranjang}/{id_buku}',[TransControllerF::class, 'qtytambah'])->name('qtytambah') ;
     Route::get('qtykurang/{id_keranjang}/{id_buku}',[TransControllerF::class, 'qtykurang'])->name('qtykurang') ;
-    
     Route::get('editmember/{id}',[MemberControllerF::class, 'edit'])->name('editmember') ;
     Route::post('updatemember/{id}',[MemberControllerF::class, 'update'])->name('updatemember') ;
 
     Route::get('wishlist',[HomeControllerF::class, 'wishlist'])->name('wishlist') ;
     Route::post('simpan-wish',[HomeControllerF::class, 'wish'])->name('simpan-wish') ;
     Route::get('hapus-wish/{id}',[HomeControllerF::class, 'hapus'])->name('hapus-wish') ;
-    
+
     Route::get('pembayaran',[PembayaranControllerF::class, 'index'])->name('pembayaran') ;
-    
+
 });
 Route::post('logoutf', [LoginControllerF::class, 'logoutf'])->name('logoutf');
 
@@ -124,9 +122,9 @@ Route::group(['middleware' => ['web', 'auth:login']], function (){
     Route::get('member', [MemberController::class, 'index'])->name('member');
     Route::get('input-member', [MemberController::class, 'tambahmember'])->name('input-member');
     Route::post('simpan-member', [MemberController::class, 'save'])->name('simpan-member');
-    Route::get('edit-member/{id_member}', [MemberController::class, 'editmember'])->name('edit-member');
-    Route::post('update-member/{id_member}', [MemberController::class, 'updatemember'])->name('update-member');
-    Route::get('hapus-member/{id_member}', [MemberController::class, 'hapusmember'])->name('hapus-member');
+    Route::get('edit-member/{id}', [MemberController::class, 'editmember'])->name('edit-member');
+    Route::post('update-member/{id}', [MemberController::class, 'updatemember'])->name('update-member');
+    Route::get('hapus-member/{id}', [MemberController::class, 'hapusmember'])->name('hapus-member');
 
     //tabel buku
     Route::get('buku', [BukuController::class, 'index'])->name('buku');
