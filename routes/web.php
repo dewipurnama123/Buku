@@ -39,9 +39,7 @@ if(Auth::user() == null)
     Route::get('kategori/{id}',[HomeControllerF::class, 'kategoriF'])->name('kategoriF') ;
     Route::get('detail/{id}',[HomeControllerF::class, 'detail'])->name('detail') ;
     Route::get('about',[HomeControllerF::class, 'about'])->name('about') ;
-
     Route::post('send-result-midtrans', [PembayaranControllerF::class, 'send_result_midtrans'])->name('send.result.midtrans');
-
 }else{
     Route::group(['middleware' => ['web', 'auth:member']], function (){
         Route::get('home',[HomeControllerF::class, 'index'])->name('home/') ;
@@ -57,7 +55,6 @@ Route::group(['middleware' => 'guest:member'], function (){
     Route::post('aksiloginf', [LogincontrollerF::class, 'aksiloginf'])->name('aksiloginf');
     Route::get('registerf', [LogincontrollerF::class, 'registerf'])->name('registerf');
     Route::post('daftarf',  [LogincontrollerF::class, 'daftarf'])->name('daftarf');
-
     Route::get('loginf',[LoginControllerF::class, 'loginf'])->name('loginf') ;
     Route::post('aksiloginf', [LoginControllerF::class, 'aksiloginf'])->name('aksiloginf');
     Route::post('daftarf',  [LoginControllerF::class, 'daftarf'])->name('daftarf');
@@ -75,14 +72,12 @@ Route::group(['middleware' => ['web', 'auth:member']], function (){
     Route::post('simpan-trans',[TransControllerF::class, 'save'])->name('simpan-trans') ;
     Route::get('trans',[TransControllerF::class, 'transaksi'])->name('trans') ;
     Route::get('dettrans/{id}',[TransControllerF::class, 'dettrans'])->name('dettrans') ;
-
     Route::get('cart1',[TransControllerF::class, 'cart1'])->name('cart1') ;
     Route::post('simpan-cart',[TransControllerF::class, 'keranjang'])->name('simpan-cart') ;
     Route::get('hapus-cart/{id}',[TransControllerF::class, 'hapus'])->name('hapus-cart') ;
 
     Route::get('qtytambah/{id_keranjang}/{id_buku}',[TransControllerF::class, 'qtytambah'])->name('qtytambah') ;
     Route::get('qtykurang/{id_keranjang}/{id_buku}',[TransControllerF::class, 'qtykurang'])->name('qtykurang') ;
-
     Route::get('editmember/{id}',[MemberControllerF::class, 'edit'])->name('editmember') ;
     Route::post('updatemember/{id}',[MemberControllerF::class, 'update'])->name('updatemember') ;
 

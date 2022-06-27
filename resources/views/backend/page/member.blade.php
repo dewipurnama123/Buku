@@ -34,7 +34,7 @@ Data Member
                         @foreach($member as $i=> $isi)
                         <tr>
                             <td>{{$member->firstItem() +$i}}</td>
-                            <!-- <td>{{ $i + 1 }}</td> -->
+                            <!-- <td>{{ $i + 1 }}</td>
                             <td>{{ $isi->nama }}</td>
                             <td>{{ $isi->province_id }}</td>
                             <td>{{ $isi->city_id }}</td>
