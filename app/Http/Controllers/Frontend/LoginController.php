@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\City;
+use App\Models\Province;
+use Kavist\RajaOngkir\Facades\RajaOngkir;
 
 class LoginController extends Controller
 {
@@ -21,16 +23,31 @@ class LoginController extends Controller
         return view('frontend.auth.login',$data);
     }
     public function registerf(){
+        $data['provinces'] = Province::pluck('name', 'province_id');
         $data['kategori'] = DB::table('kategoris')->get();
         $data['cart'] = DB::table('keranjangtmps')
         ->join('bukus','keranjangtmps.id_buku','=','bukus.id_buku')
         ->get();
         return view ('frontend.auth.register',$data);
     }
+    public function getCitiesf($id)
+    {
+        $city = City::where('province_id', $id)->pluck('name', 'city_id');
+        return response()->json($city);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+    
     public function daftarf(Request $r){
         $validator = Validator::make($r->all(), [
             'username' => 'required',
             'nama' => 'required',
+            'province_origin' => 'required',
+            'city_origin' => 'required',
             'alamat' => 'required',
             'nohp' => 'required',
             'email' => 'required',
@@ -40,15 +57,19 @@ class LoginController extends Controller
         if ($validator->fails()) {
             return back();
         }
+        
 
         $simpan = DB::table('members')->insert([
             'username' => $r->username,
             'nama' => $r->nama,
+            'province_id' => $r->province_origin,
+            'city_id' => $r->city_origin,
             'alamat' => $r->alamat,
             'nohp' => $r->nohp,
             'email' => $r->email,
             'password' => Hash::make($r->password),
         ]);
+  
 
         if ($simpan == TRUE) {
             return redirect('loginf')->with('success', 'Data berhasil disimpan');
@@ -70,7 +91,7 @@ class LoginController extends Controller
             {
                 $r->session()->put('id_member',$user->id);
                 $r->session()->regenerate();
-                return redirect('/');
+                return redirect('cart');
             }
         }
         return back();
@@ -81,7 +102,7 @@ class LoginController extends Controller
 
         Auth::guard('member')->logout();
         $r->session()->regenerateToken();
-        return redirect('/');
+        return redirect('home');
     }
   
 }

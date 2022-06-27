@@ -26,23 +26,28 @@
 										<!-- Table Header -->
 										<thead>
 										<tr>
-											<th>No</th>
+											<th>#</th>
 											<th>ID Transaksi</th>
-											<th>Status Pembayaran</th>
-											<th>Proses</th>
+											<th>Tanggal Transaksi</th>
+											<th>Sub Total</th>
+											<th>Ongkir</th>
+											<th>Total Bayar</th>
+											<th>Action</th>
 										</tr>
 										</thead>
 										<tbody>
-								@foreach ($pembayaran as $i => $isi)
-
+								@foreach ($trans as $i => $isi)
 										<tr>
 											<td>{{$i+1}}</td>
 											<!-- Product image -->
-										
-											<td>{{$isi->id_transaksi}}</td>
-											<td>{{$isi->status}}</td>
-											<td>{{$isi->proses}}</td>
-										
+											<td>TRANS-{{$isi->id_transaksi}}</td>
+											<td>{{$isi->tgl}}</td>
+											<td>Rp. {{number_format($isi->sub_total)}}</td>
+											<td>Rp. {{number_format($isi->ongkir)}}</td>
+											<td>Rp. {{number_format($isi->tot_bayar)}}</td>
+											<td>
+											<a href="{{ route('dettrans',$isi->id_transaksi)}}" class="btn btn-info">Detail </a>
+											</td>
 										</tr>
 								@endforeach
 									
@@ -77,7 +82,6 @@
 
 	<!-- Main content ends -->
 <!-- end compare content -->
-
 
 @endsection
 

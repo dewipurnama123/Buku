@@ -5,10 +5,10 @@
 	<!-- Main content starts -->
 
 	<div class="main-block">
+	<section class="ld-cart-section ptb-50">
 
-
-
-		<div class="container">
+<br><br>
+		<div class="container" >
 
 			<!-- Actual content -->
 			<div class="ecommerce pt-40">
@@ -49,12 +49,20 @@
 											<td><a href="{{route('detail',$isi->id_buku)}}">{{$isi->judul}}</a></td>
 											<td>{{$isi->pengarang}}</td>
 											<td>{{$isi->penerbit}}</td>
-											<td>Rp. {{$isi->harga}}</td>
+											<td>Rp. {{number_format($isi->harga)}}</td>
 											<td>
+											<form action="{{ route('simpan-cart')}}" method="post" enctype="multipart/form-data">
+												@csrf
+												<input   type="hidden" name="id_buku" id="id_buku" value="{{$isi->id_buku}}" >
+												<input   type="hidden" name="tgl" id="tgl" >
+												<input   type="hidden" name="qty" id="qty" value="1" >
+												<input   type="hidden" name="total" id="total"  >
+												
 												<div class="btn-group btn-group-xs">
-												<a href="{{ route('hapus-wish',$isi->id_wishlist)}}" class="close-button"><i
-                                        class="fa fa-trash"></i>
-												</div>
+												<button type="submit" class="btn btn-primary btn-block" > <i class="fa fa-shopping-cart"></i></button>
+											</div>
+											<a href="{{ route('hapus-wish',$isi->id_wishlist)}}" class="close-button"><i class="fa fa-trash"></i>
+											</form>
 											</td>
 										</tr>
 								@endforeach
@@ -86,6 +94,7 @@
 
 			</div>
 		</div>
+	</section>
 	</div>
 
 	<!-- Main content ends -->

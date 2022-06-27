@@ -15,7 +15,7 @@ class TransaksiController extends Controller
         $data['transaksi'] = DB::table('transaksis')
         // singkatan ddcadalah dump die
         //dd($data['transaksi']);
-        ->join('members', 'transaksis.id_member','=','members.id_member')
+        ->join('members', 'transaksis.id_member','=','members.id')
         // ->get();
         //paginaton
         ->simplePaginate(1);

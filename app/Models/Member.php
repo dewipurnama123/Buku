@@ -9,9 +9,11 @@ class Member extends Model
 {
     use HasFactory;
     protected $table = 'members';
-    protected $primary = 'id_member';
+    protected $primary = 'id';
     protected $fillable = [
         'nama',
+        'province_id',
+        'city_id',
         'alamat',
         'provinsi',
         'kecamatan',

@@ -11,10 +11,14 @@ Tambah Member
                 <h5>Tambah Data Member</h5>
             </div>
             <div class="card-body">
-                <form action="{{route('update-member',$member->id_member)}}" method="post"  enctype="multipart/form-data" >
+                <form action="{{route('update-member',$member->id)}}" method="post"  enctype="multipart/form-data" >
                     @csrf
                     <div class="row">
                         <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Username</label>
+                                <input type="text" name="username" class="form-control" value="{{ $member->username }}" placeholder="Username">
+                            </div>
                             <div class="form-group">
                                 <label for="">Nama</label>
                                 <input type="text" name="nama" class="form-control" value="{{ $member->nama }}" placeholder="Nama">
@@ -25,16 +29,20 @@ Tambah Member
                             </div>
                             <div class="form-group">
                                 <label for="">Provinsi</label>
-                                <input type="text" name="provinsi" class="form-control" value="{{ $member->provinsi }}" placeholder="Provinsi">
+                                <input type="text" name="province_id" class="form-control" value="{{ $member->province_id }}" placeholder="Provinsi">
                             </div>
                             <div class="form-group">
-                                <label for="">Kecamatan</label>
-                                <input type="text" name="kecamatan" class="form-control" value="{{ $member->kecamatan }}" placeholder="Kecamatan">
+                                <label for="">Kota</label>
+                                <input type="text" name="city_id" class="form-control" value="{{ $member->city_id }}" placeholder="Kota">
                             </div>
 
                         </div>
 
                         <div class="col-md-6">
+                        <div class="form-group">
+                                <label for="">Alamat</label>
+                                <input type="number" name="alamat" class="form-control" value="{{ $member->alamat }}" placeholder="Alamat">
+                            </div>
                             <div class="form-group">
                                 <label for="">Nohp</label>
                                 <input type="number" name="nohp" class="form-control" value="{{ $member->nohp }}" placeholder="Nohp">

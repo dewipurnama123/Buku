@@ -22,6 +22,7 @@ class CreateBukusTable extends Migration
             $table->string('tahun');
             $table->integer('harga');
             $table->integer('stok');
+            $table->integer('berat');
             $table->string('gambar')->nullable;
             $table->timestamps();
         });

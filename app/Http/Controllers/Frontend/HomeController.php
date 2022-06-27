@@ -13,7 +13,6 @@ use Auth;
 class HomeController extends Controller
 {
     public function index(){
-
         $data['kategori'] = DB::table('kategoris')->get();
         $data['buku'] = DB::table('bukus')
         ->paginate(12);
