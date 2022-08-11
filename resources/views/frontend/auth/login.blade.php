@@ -28,7 +28,9 @@
                                             Login
                                         </button>
 										<div class="text-center">
-                        <a class="small" href="{{route('registerf')}}">Create an Account!</a>
+                        <a class="small" href="{{route('registerf')}}">Create an Account!</a> 
+						/ 
+						<a href="#" class="small" role="button" onclick="bukax()">Lupa Password</a>
 </div>
 					</form>
 				</div><!-- col-sm-5 -->
@@ -44,6 +46,37 @@
 
 	</section>
 </main>
+
+
+<div class="modal" id="myModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Reset Password</h4>
+            </div>
+
+            <form action="{{ route('reset-password') }}" method="POST">
+                @csrf
+                <div class="modal-body">
+                    <label for="">Email Pemulihan</label>
+                    <input type="email" name="email" placeholder="Klik Disini" class="form-control my-3">
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" style="width:100%;">Kirim Link Reset Password</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<script>
+    function bukax() {
+        $('#myModal').modal('show')
+        
+    }
+</script>
 <!-- end  main content -->
 
 @endsection
