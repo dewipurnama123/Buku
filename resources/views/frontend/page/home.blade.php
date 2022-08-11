@@ -162,12 +162,5 @@
 </form>
 	<!-- Start Our Shop Items -->
 
-	
-
-
-
-	
-
-
 <!-- end main content -->
 @endsection

@@ -18,6 +18,8 @@ use App\Http\Controllers\Frontend\TransController as TransControllerF;
 use App\Http\Controllers\Frontend\PembayaranController as PembayaranControllerF;
 use App\Http\Controllers\Frontend\CheckOngkirController;
 use App\Http\Controllers\API\PaymentController;
+// reset password
+use App\Http\Controllers\LupapasswordController;
 
 
 
@@ -38,6 +40,11 @@ use App\Http\Controllers\API\PaymentController;
 // frontend
 if(Auth::user() == null)
 {
+    // lupa password
+    Route::post('/reset-password', [LupapasswordController::class, 'resetPassword'])->name('reset-password');
+    Route::get('/password-reset/{id}',[LupapasswordController::class,'halamanReset'])->name('password-reset');
+    Route::post('/password-update/{id}',[LupapasswordController::class,'updatePassword'])->name('password-update');
+
     Route::get('home',[HomeControllerF::class, 'index'])->name('home') ;
     Route::get('kategori/{id}',[HomeControllerF::class, 'kategoriF'])->name('kategoriF') ;
     Route::get('detail/{id}',[HomeControllerF::class, 'detail'])->name('detail') ;
