@@ -12,13 +12,28 @@ class BukuController extends Controller
 {
     public function index()
     {
+        // $a = DB::table('tbl_produk')->get();
+        // foreach ($a as $aa) {
+        //     DB::table('bukus')->insert([
+        //         'id_kategori' => $aa->id_kategori,
+        //         'judul'=>$aa->judul,
+        //         'penerbit'=>$aa->penerbit,
+        //         'pengarang'=>$aa->penulis,
+        //         'tahun'=>$aa->tahunterbit,
+        //         'harga'=>$aa->harga,
+        //         'stok'=>10,
+        //         'berat'=>$aa->berat,
+        //         'gambar'=>$aa->foto,
+        //         'desc'=>$aa->deskripsi
+        //     ]);
+        // }
         $data['buku'] = DB::table('bukus')
         // singkatan ddcadalah dump die
         //dd($data['buku']);
         ->join('kategoris', 'bukus.id_kategori','=','kategoris.id_kategori')
         // ->get();
         //pagination
-        ->simplePaginate(5);
+        ->simplePaginate(10);
         return view('backend.page.buku', $data);
     }
     public function tambahbuku()

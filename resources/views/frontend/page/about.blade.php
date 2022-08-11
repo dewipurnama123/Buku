@@ -14,7 +14,7 @@
 
     <div class="col-lg-6">
        <img src="frontend/img/slide/slider1.png" width="500" class="img-fluid" alt="">
-         
+
 
     </div>
 
@@ -66,7 +66,7 @@
       var email = $('#email').val()
       var judul = $('#judul').val()
       var pesan = $('#pesan').val()
-      window.open('https://api.whatsapp.com/send/?phone=6282170214495&text=To+%3A+CV.+Mediatama+Web+Indonesia%0A%0AFrom+%3A%0A-+Nama+%3A+'+nama+'%0A-+Email+%3A+'+email+'%0A%0APekerjaan+%3A+'+judul+'%0A-+Permasalahan+%3A+'+pesan+'.&app_absent=0','_blank')
+      window.open('https://api.whatsapp.com/send/?phone=6282124495025&text=To+%3A+Sarianggrek%0A%0AFrom+%3A%0A-+Nama+%3A+'+nama+'%0A-+Email+%3A+'+email+'%0A%0APekerjaan+%3A+'+judul+'%0A-+Permasalahan+%3A+'+pesan+'.&app_absent=0','_blank')
   }
 </script>
 @endsection

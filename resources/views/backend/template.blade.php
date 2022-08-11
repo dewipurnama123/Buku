@@ -32,10 +32,11 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                <div class="sidebar-brand-icon rotate-n-1">
+                    <!-- <i class="fas fa-laugh-wink"></i> -->
+                    <img alt=""  src="{{ asset('/')}}backend/gambar/logo2.png" class="footer-logo" height="50" style="border-radius: 50%" >
                 </div>
-                <div class="sidebar-brand-text mx-3">Toko Buku </div>
+                <div class="sidebar-brand-text mx-3">Sarianggrek</div>
             </a>
 
             <!-- Divider -->
@@ -56,14 +57,14 @@
                 Data Toko Buku
             </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
+            <!-- Nav Item - Pages Collapse Menu
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{route('user')}}">
                     <i class="fas fa-fw fa-user"></i>
                     <span>User</span>
 
                 </a>
-            </li>
+            </li> -->
 
             <!-- Nav Item - Kategori Collapse Menu -->
             <li class="nav-item">
@@ -93,17 +94,11 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{route('transaksi')}}" >
                     <i class="fas fa-fw fa-money-check-alt"></i>
-                    <span>Transaksi</span>
+                    <span>Laporan Transaksi</span>
                 </a>
             </li>
 
-              <!-- Nav Item - Keranjang Collapse Menu -->
-              <li class="nav-item">
-                <a class="nav-link collapsed" href="{{route('keranjang')}}" >
-                    <i class="fas fa-fw fa-shopping-cart"></i>
-                    <span>keranjang</span>
-                </a>
-            </li>
+
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -142,7 +137,7 @@
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->username}}</span>
-                            <img class="img-profile rounded-circle" src="backend/gambar/anime3.jpg">
+                            <img class="img-profile rounded-circle" src="{{ asset('/')}}backend/gambar/anime3.jpg">
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

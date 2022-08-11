@@ -32,7 +32,7 @@
                                     <select name="member_privat" id="member_privat" class="form-control" id="">
                                         <option value="" disabled selected>Select Member</option>
                                         @foreach ($member as $item)
-                                            <option value="{{$item->id_member}}">{{$item->nama}}</option>
+                                            <option value="{{$item->id}}">{{$item->nama}}</option>
                                         @endforeach
                                     </select>
                                     @error('member_privat')
@@ -55,29 +55,21 @@
                                     <label for="">Tanggal</label>
                                     <input type="date" name="tgl" class="form-control" placeholder="Tgl">
                                 </div>
-                                <div class="form-group">
-                                    <label for="">Stok</label>
-                                    <input type="integer" name="stok" id="stok_privat" class="form-control" placeholder="Stok">
-                                </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-group">
+                            <div class="form-group">
                                     <label for="">Harga</label>
                                     <input type="float" name="harga" id="harga_privat" class="form-control" placeholder="Harga">
                                 </div>
                                 <div class="form-group">
                                     <label for="">Quantity</label>
                                     <!-- <input onkeyup="total(this)" type="number" name="quantity" id="quantity_privat" class="form-control" placeholder="Quantity"> -->
-                                    <input  type="number" name="quantity" id="quantity_privat" class="form-control" placeholder="Quantity">
+                                    <input  type="number" name="qty" id="quantity_privat" class="form-control" placeholder="Quantity">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="">Total</label>
                                     <input type="float" name="total" id="total_privat" class="form-control" placeholder="Total">
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Keterangan</label>
-                                    <textarea  name="ket" class="form-control" placeholder="Keterangan"></textarea>
                                 </div>
                             </div>
                                 <button type="submit" class="btn btn-success btn-block ">Simpan</button>
@@ -89,14 +81,14 @@
     </div>
     <script>
         $('#quantity_privat').keyup(function(){
-            var quantity = $('#quantity_privat').val();
+            var qty = $('#quantity_privat').val();
             var harga = $('#harga_privat').val();
-            console.log(harga,quantity);
+            console.log(harga,qty);
             //alert(harga)
             if (harga == '') {
                 alert("Pilih harga")
             }else{3
-                var total = parseInt(quantity)* parseInt (harga);
+                var total = parseInt(qty)* parseInt (harga);
                 $('#total_privat').val(total);
             }
         })

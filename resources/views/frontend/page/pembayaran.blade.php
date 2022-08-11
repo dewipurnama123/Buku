@@ -27,9 +27,10 @@
 										<thead>
 										<tr>
 											<th>No</th>
-											<th>ID Transaksi</th>
+											<th>Order ID</th>
+                                            <th>Tipe Pembayaran</th>
 											<th>Status Pembayaran</th>
-											<th>Proses</th>
+
 										</tr>
 										</thead>
 										<tbody>
@@ -38,16 +39,16 @@
 										<tr>
 											<td>{{$i+1}}</td>
 											<!-- Product image -->
-										
-											<td>{{$isi->id_transaksi}}</td>
-											<td>{{$isi->status}}</td>
-											<td>{{$isi->proses}}</td>
-										
+											<td>{{$isi->invoice}}</td>
+                                            <td>{{$isi->payment_type}}</td>
+											<td>{{$isi->transaction_status}}</td>
+
+
 										</tr>
 								@endforeach
-									
+
 											<!-- Product image -->
-										
+
 										</tbody>
 									</table>
 								</div>

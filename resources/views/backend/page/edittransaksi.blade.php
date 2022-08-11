@@ -35,8 +35,12 @@ Tambah Transaksi
                                 <input type="date" name="tgl" class="form-control" value="{{ $transaksi->tgl }}" placeholder="Tanggal">
                             </div>
                             <div class="form-group">
-                                <label for="">Invoice</label>
-                                <input type="text" name="invoice" class="form-control" value="{{ $transaksi->invoice }}" placeholder="Invoice">
+                                <label for="">Jumlah</label>
+                                <input type="text" name="sub_total" class="form-control" value="{{ $transaksi->sub_total }}" placeholder="Jumlah">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Total</label>
+                                <input type="text" name="tot_bayar" class="form-control" value="{{ $transaksi->tot_bayar }}" placeholder="Total">
                             </div>
                             <button type="submit" class="btn btn-success btn-block ">Simpan</button>
                         </div>

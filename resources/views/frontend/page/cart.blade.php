@@ -120,7 +120,7 @@
                                             <!-- Begin tab content -->
                                             <div class="col-md-12">
 
-                                                <input type="hidden" name="city_origin" id="city_origin" value="20">
+                                                <input type="hidden" name="city_origin" id="city_origin" value="318">
                                                 <input type="hidden" name="city_destination" id="city_destination"
                                                     value="{{Auth::user()->city_id}}">
                                                 <input type="hidden" value="{{$totberat}}" name="weight" id="weight">
@@ -138,7 +138,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <br> <br>
-                                                        <button class="btn btn-md btn-primary btn-block btn-check">CEK
+                                                        <button  class="btn btn-md btn-primary btn-block btn-check">CEK
                                                             ONGKOS KIRIM</button>
                                                     </div>
                                                     <div class="col-md-12">
@@ -299,11 +299,7 @@
     });
 
     function hasil_cost(cost) {
-        var subtotal = {
-            {
-                $subtotal
-            }
-        };
+        var subtotal = '{{ $subtotal}}';
         var total = parseInt(cost) + parseInt(subtotal)
         $('#costvalue').html('Rp.' + cost)
         $('#total').html('Rp.' + total)
