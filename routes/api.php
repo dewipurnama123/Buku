@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\PembayaranController as PembayaranControllerF;
+use App\Http\Controllers\API\PaymentController;
 
 
 /*
@@ -20,3 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::post('get-snaptoken', [PembayaranControllerF::class, 'get_snap_token'])->name('get.snaptoken');
+
+Route::post('payment-handler', [PaymentController::class, 'payment_handler'])->name('payment.handler');

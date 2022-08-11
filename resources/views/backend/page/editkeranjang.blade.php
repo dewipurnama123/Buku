@@ -35,7 +35,7 @@ Tambah Keranjang
                                 <select name="member_privat" id="member_privat" class="form-control" id="">
                                     <option value="" disabled selected>Select Member</option>
                                     @foreach ($member as $item)
-                                        <option value="{{$item->id_member}}">{{$item->nama}}</option>
+                                        <option value="{{$item->id}}">{{$item->nama}}</option>
                                     @endforeach
                                     <script>
                                         document.getElementById('member_privat').value = '{{$keranjang->id_member}}'
@@ -64,27 +64,19 @@ Tambah Keranjang
                                 <label for="">Tanggal</label>
                                 <input type="date" name="tgl" class="form-control" value="{{ $keranjang->tgl }}" placeholder="Tgl">
                             </div>
-                            <div class="form-group">
-                                <label for="">Stok</label>
-                                <input type="integer" name="stok" id="stok_privat" class="form-control" value="{{ $keranjang->stok }}" placeholder="Stok">
-                            </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
+                        <div class="form-group">
                                 <label for="">Harga</label>
                                 <input type="float" name="harga" id="harga_privat"  value="{{ $keranjang->harga}}" class="form-control" placeholder="Harga">
                             </div>
                             <div class="form-group">
                                 <label for="">Quantity</label>
-                                <input type="integer" name="quantity" id="quantity_privat"  value="{{ $keranjang->quantity}}" class="form-control" placeholder="Quantity">
+                                <input type="integer" name="qty" id="quantity_privat"  value="{{ $keranjang->qty}}" class="form-control" placeholder="Quantity">
                             </div>
                             <div class="form-group">
                                 <label for="">Total</label>
                                 <input type="float" name="total" id="total"  value="{{ $keranjang->total}}" class="form-control" placeholder="Total">
-                            </div>
-                            <div class="form-group">
-                                <label for="">Keterangan</label>
-                                <textarea name="ket" class="form-control" value="{{ $keranjang->ket }}" placeholder="Keterangan"></textarea>
                             </div>
                         </div>
                     </div>

@@ -16,9 +16,9 @@ class KeranjangController extends Controller
         // singkatan ddcadalah dump die
         // dd($data['keranjang']);
         ->join('transaksis', 'keranjangs.id_transaksi','transaksis.id_transaksi')
-        ->join('members', 'keranjangs.id_member','members.id_member')
+        ->join('members', 'keranjangs.id_member','members.id')
         ->join('bukus', 'keranjangs.id_buku','bukus.id_buku')
-        ->select('transaksis.id_transaksi','members.id_member','members.nama', 'bukus.id_buku', 'bukus.judul','keranjangs.tgl','keranjangs.stok','keranjangs.harga','keranjangs.quantity','keranjangs.total','keranjangs.ket','keranjangs.id_keranjang')
+        ->select('transaksis.id_transaksi','members.id','members.nama', 'bukus.id_buku','bukus.harga', 'bukus.judul','keranjangs.tgl','keranjangs.qty','keranjangs.total','keranjangs.id_keranjang')
         // ->get();
         //pagination
         ->simplePaginate(5);
@@ -40,10 +40,7 @@ class KeranjangController extends Controller
             'member_privat'=> 'required',
             'buku_privat'=> 'required',
             'tgl' => 'required',
-            'stok' => 'required',
-            'ket' => 'required',
-            'harga' => 'required',
-            'quantity' => 'required',
+            'qty' => 'required',
             'total' => 'required',
         ]);
 
@@ -58,10 +55,7 @@ class KeranjangController extends Controller
             'id_member' =>$r->member_privat,
             'id_buku' =>$r->buku_privat,
             'tgl' =>$r->tgl,
-            'stok' => $r->stok,
-            'ket' => $r->ket,
-            'harga' => $r->harga,
-            'quantity'=> $r->quantity,
+            'qty'=> $r->qty,
             'total' => $r->total,
         ]);
 
@@ -73,7 +67,9 @@ class KeranjangController extends Controller
     }
     public function editkeranjang($id)
     {
-        $data['keranjang'] = DB::table('keranjangs')->where('id_keranjang', $id)->first();
+        $data['keranjang'] = DB::table('keranjangs')->where('id_keranjang', $id)
+        ->join('bukus', 'keranjangs.id_buku','bukus.id_buku')
+        ->first();
         $data['transaksi']=DB::table('transaksis')->get();
         $data['member']=DB::table('members')->get();
         $data['buku']=DB::table('bukus')->get();
@@ -87,10 +83,8 @@ class KeranjangController extends Controller
             'member_privat'=> 'required',
             'buku_privat'=> 'required',
             'tgl' => 'required',
-            'stok' => 'required',
-            'ket' => 'required',
-            'harga' => 'required',
-            'quantity' => 'required',
+
+            'qty' => 'required',
             'total' => 'required',
         ]);
 
@@ -104,10 +98,8 @@ class KeranjangController extends Controller
             'id_member' =>$r->member_privat,
             'id_buku' =>$r->buku_privat,
             'tgl' => $r->tgl,
-            'stok' => $r->stok,
-            'ket' => $r->ket,
-            'harga' => $r->harga,
-            'quantity'=> $r->quantity,
+
+            'qty'=> $r->qty,
             'total' => $r->total
         ]);
 

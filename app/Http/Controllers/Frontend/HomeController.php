@@ -13,15 +13,32 @@ use Auth;
 class HomeController extends Controller
 {
     public function index(){
+        // $a = DB::table('tbl_produk')->get();
+        // foreach ($a as $aa) {
+        //     DB::table('bukus')->insert([
+        //         'id_kategori' => $aa->id_kategori,
+        //         'judul'=>$aa->judul,
+        //         'penerbit'=>$aa->penerbit,
+        //         'pengarang'=>$aa->penulis,
+        //         'tahun'=>$aa->tahunterbit,
+        //         'harga'=>$aa->harga,
+        //         'stok'=>10,
+        //         'berat'=>$aa->berat,
+        //         'gambar'=>$aa->foto,
+        //         'desc'=>$aa->deskripsi
+        //     ]);
+        // }
+        // dd($a);
+
         $data['kategori'] = DB::table('kategoris')->get();
         $data['buku'] = DB::table('bukus')
         ->paginate(12);
         $data['cart'] = DB::table('keranjangtmps')
         ->join('bukus','keranjangtmps.id_buku','=','bukus.id_buku')
         ->get();
-        
+
         return view ('frontend.page.home',$data);
-        
+
     }
     public function kategoriF($id){
         $data['kate'] = DB::table('kategoris')->where('kategoris.id_kategori',$id)->first();
@@ -34,10 +51,10 @@ class HomeController extends Controller
         ->join('bukus','keranjangtmps.id_buku','=','bukus.id_buku')
         ->get();
         return view ('frontend.page.kategori',$data);
-        
+
     }
     public function detail($id){
-        
+
         $data['kategori'] = DB::table('kategoris')->get();
         $data['buku'] = DB::table('bukus')
         ->join('kategoris','bukus.id_kategori','=','kategoris.id_kategori')
@@ -46,9 +63,9 @@ class HomeController extends Controller
         ->join('bukus','keranjangtmps.id_buku','=','bukus.id_buku')
         ->get();
         return view ('frontend.page.detail',$data);
-        
+
     }
-   
+
     public function about(){
 
         $data['kategori'] = DB::table('kategoris')->get();
@@ -56,13 +73,13 @@ class HomeController extends Controller
         ->join('bukus','keranjangtmps.id_buku','=','bukus.id_buku')
         ->get();
         return view ('frontend.page.about',$data);
-        
+
     }
     public function wishlist(){
         $id_member = Auth::user()->id;
         // dd($id_member);
         $data['kategori'] = DB::table('kategoris')->get();
-       
+
         $data['wish'] = DB::table('wishlists')
         ->join('bukus','wishlists.id_buku','=','bukus.id_buku')->where('id_member',$id_member)
         ->get();
@@ -70,16 +87,16 @@ class HomeController extends Controller
         ->join('bukus','keranjangtmps.id_buku','=','bukus.id_buku')->where('id_member',$id_member)
         ->get();
         return view ('frontend.page.wishlist',$data);
-    
+
     }
 
     public function wish(Request $r)
     {
         $validator = Validator::make($r->all(),[
             'id_buku' => 'required'
-            
+
         ]);
-    
+
         if ($validator->fails()){
             return redirect('wishlist')
             ->withErrors($validator)
@@ -96,17 +113,17 @@ class HomeController extends Controller
             if($cek==TRUE){
                $simpan= DB::table('wishlists')->where('id_wishlist',$cek->id_wishlist)
                 ->update([
-                    'id_buku' => $cek->id_buku, 
-                ]); 
-            }else{    
+                    'id_buku' => $cek->id_buku,
+                ]);
+            }else{
                 $simpan= DB::table('wishlists')->insert([
                     'id_member'=> $id_member,
                     'id_buku'=> $r->id_buku,
-                   
+
                 ]);
             }
         }
-    
+
         if($simpan == TRUE){
             return redirect ('wishlist')-> with('success','Data Berhasil Disimpan');
         }else{

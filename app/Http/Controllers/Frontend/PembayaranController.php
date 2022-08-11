@@ -11,19 +11,20 @@ use Auth;
 
 class PembayaranController extends Controller
 {
-   
+
     public function index(){
         $id_member = Auth::user()->id;
         $data['kategori'] = DB::table('kategoris')->get();
-        $data['cart'] = DB::table('keranjangtmps')
-        ->join('bukus','keranjangtmps.id_buku','=','bukus.id_buku')->where('id_member',$id_member)
+        $data['cart'] = DB::table('keranjangs')
+        ->join('bukus','keranjangs.id_buku','=','bukus.id_buku')->where('id_member',$id_member)
         ->get();
-       
+
         $data['pembayaran'] = DB::table('pembayarans')
-        ->join('transaksis','pembayarans.id_transaksi','=','transaksis.id_transaksi')->where('id_member',$id_member)
+        ->join('transaksis','pembayarans.id','=','transaksis.id_member')->where('id_member',$id_member)
+        // ->select('members.id','transaksis.id_transaksi','pembayarans.status_message','pembayarans.status_code', 'pembayarans.total_bayar','pembayarans.invoice','transaksis.asal', 'bukus.judul','pembayarans.payment_type','pembayarans.transaction_id','pembayarans.transaction_time','pembayarans.transaction_status','pembayarans.fraud_status')
         ->get();
         return view ('frontend.page.pembayaran',$data);
-    
+
     }
     public function get_snap_token(Request $request)
     {
@@ -52,7 +53,7 @@ class PembayaranController extends Controller
 
         $snapToken = \Midtrans\Snap::getSnapToken($params);
         // dd($snapToken);
-    
+
         $data = [
             'status' => 'ok',
             'snaptoken' => $snapToken,
@@ -62,19 +63,23 @@ class PembayaranController extends Controller
     public function send_result_midtrans(Request $request)
     {
         $id= Auth::user()->id;
-        $city = DB::table('cities')->where('city_id', Auth::user()->city_destination)->first();
+        $city = DB::table('cities')->where('city_id', Auth::user()->city_id)->first();
         $tujuan=$city->name;
+        // $transaksi= DB::table('transaksis')
+        // ->join('pembayarans','transaksis.id_transaksi','=','pembayarans.id_transaksi')
+        // ->where('pembayarans.id_transaksi',$id)
+        // ->first();
         $json = json_decode($request->json);
         $asal="Tanggerang";
         // dd($json);
-        $simpan = DB::table('tb_transaksis')->insert([
+        $simpan = DB::table('pembayarans')->insert([
             'id'=>$id,
             'total_bayar'=>$json->gross_amount,
             'invoice'=>$json->order_id,
             'asal'=>$asal,
             'tujuan'=>$tujuan,
             // 'kurir'=>$request->courier,
-            'ongkir'=>$request->hasil_ongkir,
+            // 'ongkir'=>$request->hasil_ongkir,
             'status_code' => $json->status_code,
             'status_message' => $json->status_message,
             'transaction_id' => $json->transaction_id,
@@ -95,5 +100,5 @@ class PembayaranController extends Controller
         }
     }
 
-   
+
 }

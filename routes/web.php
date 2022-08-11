@@ -16,7 +16,10 @@ use App\Http\Controllers\Frontend\LoginController as LoginControllerF;
 use App\Http\Controllers\Frontend\MemberController as MemberControllerF;
 use App\Http\Controllers\Frontend\TransController as TransControllerF;
 use App\Http\Controllers\Frontend\PembayaranController as PembayaranControllerF;
-use App\Http\Controllers\Frontend\CheckOngkirController ;
+use App\Http\Controllers\Frontend\CheckOngkirController;
+use App\Http\Controllers\API\PaymentController;
+
+
 
 
 
@@ -80,6 +83,7 @@ Route::group(['middleware' => ['web', 'auth:member']], function (){
     Route::post('simpan-cart',[TransControllerF::class, 'keranjang'])->name('simpan-cart') ;
     Route::get('hapus-cart/{id}',[TransControllerF::class, 'hapus'])->name('hapus-cart') ;
 
+
     Route::get('qtytambah/{id_keranjang}/{id_buku}',[TransControllerF::class, 'qtytambah'])->name('qtytambah') ;
     Route::get('qtykurang/{id_keranjang}/{id_buku}',[TransControllerF::class, 'qtykurang'])->name('qtykurang') ;
 
@@ -91,6 +95,10 @@ Route::group(['middleware' => ['web', 'auth:member']], function (){
     Route::get('hapus-wish/{id}',[HomeControllerF::class, 'hapus'])->name('hapus-wish') ;
 
     Route::get('pembayaran',[PembayaranControllerF::class, 'index'])->name('pembayaran') ;
+    Route::post('send_result_midtrans',[PembayaranControllerF::class, 'send_result_midtrans'])->name('send.result.midtrans') ;
+
+    Route::post('payment_handler',[PaymentController::class, 'payment_handler'])->name('payment.handler') ;
+
 
 });
 Route::post('logoutf', [LoginControllerF::class, 'logoutf'])->name('logoutf');
@@ -100,6 +108,7 @@ Route::group(['middleware' => 'guest:login'], function (){
     Route::post('aksilogin', [LoginController::class, 'aksilogin'])->name('aksilogin');
     Route::get('register', [LoginController::class, 'register'])->name('register');
     Route::post('daftar',  [LoginController::class, 'daftar'])->name('daftar');
+
 });
 
 //Backend
@@ -141,10 +150,8 @@ Route::group(['middleware' => ['web', 'auth:login']], function (){
 
     //tabel transaksi
     Route::get('transaksi', [TransaksiController::class, 'index'])->name('transaksi');
-    Route::get('input-transaksi', [TransaksiController::class, 'tambahtransaksi'])->name('input-transaksi');
-    Route::post('simpan-transaksi', [TransaksiController::class, 'save'])->name('simpan-transaksi');
-    Route::get('edit-transaksi/{id_transaksi}', [TransaksiController::class, 'edittransaksi'])->name('edit-transaksi');
-    Route::post('update-transaksi/{id_transaksi}', [TransaksiController::class, 'updatetransaksi'])->name('update-transaksi');
+    Route::get('print-transaksi', [TransaksiController::class, 'printtransaksi'])->name('print-transaksi');
+    Route::get('detail-transaksi/{id_transaksi}', [TransaksiController::class, 'detailtransaksi'])->name('detail-transaksi');
     Route::get('hapus-transaksi/{id_transaksi}', [TransaksiController::class, 'hapustransaksi'])->name('hapus-transaksi');
 
     //tabel keranjang

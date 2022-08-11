@@ -21,9 +21,9 @@ class MemberController extends Controller
     $data['kategori'] = DB::table('kategoris')->get();
     $data['buku'] = DB::table('bukus')
     ->paginate(12);
-   
+
     return view ('frontend.page.homef',$data);
-    
+
 }
 public function kategoriF($id){
     $data['kate'] = DB::table('kategoris')->where('kategoris.id_kategori',$id)->first();
@@ -33,7 +33,7 @@ public function kategoriF($id){
     ->where('kategoris.id_kategori',$id)
     ->get();
     return view ('frontend.page.kategori',$data);
-    
+
 }
 
 public function edit($id){
@@ -44,7 +44,7 @@ public function edit($id){
     ->join('bukus','keranjangtmps.id_buku','=','bukus.id_buku')
     ->get();
      return view ('frontend.page.member',$data);
-   
+
 }
 
 public function update(Request $r,$id){
@@ -57,7 +57,7 @@ public function update(Request $r,$id){
         'nohp' => 'required',
         'email' => 'required',
         'password' => 'required',
-        
+
     ]);
 
     if ($validator->fails()){

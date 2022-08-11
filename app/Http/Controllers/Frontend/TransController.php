@@ -15,14 +15,14 @@ use Kavist\RajaOngkir\Facades\RajaOngkir;
 class TransController extends Controller
 {
     public function cart(){
-        
+
         $id_member = Auth::user()->id;
         $data['kategori'] = DB::table('kategoris')->get();
         $data['cart'] = DB::table('keranjangtmps')
         ->join('bukus','keranjangtmps.id_buku','=','bukus.id_buku')->where('id_member',$id_member)
         ->get();
         $data['provinces'] = Province::pluck('name', 'province_id');
-        
+
         $dataInv = DB::table('transaksis')->orderBy('id_transaksi','DESC')->first();
         if($dataInv != NULL)
         {
@@ -40,7 +40,7 @@ class TransController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     }
-    
+
     public function check_ongkir(Request $request)
     {
         $cost = RajaOngkir::ongkosKirim([
@@ -55,7 +55,7 @@ class TransController extends Controller
     }
 
     public function save(Request $r){
-        
+
         // simpan data ke dalam table transaksi
         $id_member = Auth::user()->id;
         $tgl = date('Y-m-d');
@@ -67,7 +67,7 @@ class TransController extends Controller
             'invoice' => $invoice,
             'sub_total' => $r->subtotal,
             'ongkir' => $r->costvalue,
-            'tot_bayar' => $r->total
+            'tot_bayar' => $r->total,
         ]);
 
         // pindahkan semua data dari table keranjang tmp ke dalam tabel keranjang
@@ -85,7 +85,7 @@ class TransController extends Controller
                 'tgl' => $isi->tgl,
                 'qty' => $isi->qty,
                 'total' => $isi->total,
-                
+
             ]);
         }
 
@@ -103,19 +103,19 @@ class TransController extends Controller
     public function cart1(){
         $id_member = Auth::user()->id;
         $data['kategori'] = DB::table('kategoris')->get();
-        $data['cart'] = DB::table('keranjangtmps') 
+        $data['cart'] = DB::table('keranjangtmps')
         ->join('bukus','keranjangtmps.id_buku','=','bukus.id_buku')->where('id_member',$id_member)
         ->paginate(3);
         return view ('frontend.template',$data);
-        
+
     }
     public function keranjang(Request $r)
     {
         $validator = Validator::make($r->all(),[
             'id_buku' => 'required'
-            
+
         ]);
-    
+
         if ($validator->fails()){
             return redirect('cart')
             ->withErrors($validator)
@@ -126,7 +126,7 @@ class TransController extends Controller
             $barang = DB::table('bukus')->where('id_buku',$r->id_buku)->first();
             // stelah data hargabarang di dapat maka jumlah dikali harga
             $harga = $barang->harga;
-            
+
             $total = $harga * $r->qty;
 
             // cek id buku yang sama
@@ -136,21 +136,21 @@ class TransController extends Controller
             if($cek==TRUE){
                $simpan= DB::table('keranjangtmps')->where('id_keranjang',$cek->id_keranjang)
                 ->update([
-                    'qty' => $cek->qty+1, 
+                    'qty' => $cek->qty+1,
                     'total' => $cek->total+$harga,
-                ]); 
-            }else{    
+                ]);
+            }else{
                 $simpan= DB::table('keranjangtmps')->insert([
                     'id_member'=> $id_member,
                     'id_buku'=> $r->id_buku,
                     'tgl'=> date('Y-m-d'),
                     'qty'=> $r->qty,
                     'total'=> $total,
-                    
+
                 ]);
             }
         }
-    
+
         if($simpan == TRUE){
             return redirect ('cart')-> with('success','Data Berhasil Disimpan');
         }else{
@@ -175,7 +175,7 @@ class TransController extends Controller
         //buka tabel keranjangtmps berdasarkan id_kerjanng
         $keranjang = DB::table('keranjangtmps')->join('bukus','keranjangtmps.id_buku','=','bukus.id_buku')
         ->where('id_keranjang',$id_keranjang)->first();
-        
+
         //munculkan qty berdasarkan id_buku
         $qty = $keranjang->qty;
         //tambah qty (+1)
@@ -200,15 +200,15 @@ public function qtykurang($id_keranjang,$id_buku){
 
         $harga = $keranjang->harga;
         $ttl= $total*$harga;
-        
+
         $update=DB::table('keranjangtmps')->where('id_keranjang',$id_keranjang)->update(['qty'=>$total,'total'=>$ttl]);
     }
-   
+
     return back();
 }
 
 public function transaksi(){
-    
+
     $id_member = Auth::user()->id;
     $data['kategori'] = DB::table('kategoris')->get();
     $data['cart'] = DB::table('keranjangtmps')
@@ -226,11 +226,13 @@ public function dettrans($id){
     $data['cart'] = DB::table('keranjangtmps')
     ->join('bukus','keranjangtmps.id_buku','=','bukus.id_buku')->where('id_member',$id_member)
     ->get();
-    
+
     $data['trans'] = DB::table('transaksis')->where('transaksis.id_transaksi',$id)->first();
     $data['detail'] = DB::table('keranjangs')
     ->join('bukus','keranjangs.id_buku','=','bukus.id_buku')
-    ->where('id_transaksi',$id)->get();
+    // ->select('transaksis.id_transaksi', 'members.id_member','bukus.id_buku','transaksis.tgl','keranjangs.qty', 'keranjangs.total')
+    ->where('id_transaksi',$id)
+    ->get();
  return view ('frontend.page.dettrans',$data);
 
 }

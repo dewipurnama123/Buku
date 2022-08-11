@@ -15,7 +15,7 @@ class KategoriController extends Controller
         $data['kategori'] = DB::table('kategoris')
         // ->get();
         //pagination
-        ->simplePaginate(3);
+        ->simplePaginate(4);
         // singkatan ddcadalah dump die
         //dd($data['kategori']);
         return view('backend.page.kategori', $data);

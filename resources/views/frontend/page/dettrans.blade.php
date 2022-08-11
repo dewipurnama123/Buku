@@ -94,7 +94,7 @@
                                 </table>
                             </div>
                             <a href="{{route('trans')}}" class="btn btn-info" style="margin-top:1rem; margin-left:1rem;">Back</a>
-                        	<button type="button" id="pay-button" class="btn btn-primary my-3 py-3" style="margin-top:1rem; margin-left:1rem;">Proses Pembayaran</button>	
+                        	<button type="button" id="pay-button" class="btn btn-primary my-3 py-3" style="margin-top:1rem; margin-left:1rem;">Proses Pembayaran</button>
                             <!-- Pagination -->
                             <div class="shopping-pagination">
                                 <ul class="pagination pull-right">
@@ -118,6 +118,12 @@
         </div>
     </div>
 </div>
+<form action="{{route('send.result.midtrans')}}" method="post" id="myForm">
+    @csrf
+    <input type="hidden" name="json" id="json">
+    <input type="hidden" class="form_control" name="hasil_ongkir" id="hasil_ongkir">
+    <input type="hidden" class="form_control" name="courier" id="courier">
+</form>
 
 <!-- Main content ends -->
 <!-- end compare content -->

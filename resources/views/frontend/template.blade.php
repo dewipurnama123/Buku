@@ -14,7 +14,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- Fav icon -->
-	<link rel="shortcut icon" href="{{asset('/')}}frontend/img/logo.png">
+	<link rel="shortcut icon" href="{{asset('/')}}frontend/img/logo2.png">
 
 	<!-- Font -->
 	<link href='https://fonts.googleapis.com/css?family=Lato:400,400italic,900,700,700italic,300' rel='stylesheet' type='text/css'>
@@ -45,7 +45,7 @@
 	<script src="{{asset('/')}}frontend/js/vendor/modernizr-2.6.2.min.js"></script>
 
   <!-- Required Raja Ongkir -->
- 
+
 </head>
 
 <body class="style-14 index-2">
@@ -74,17 +74,17 @@
 			<!-- Contact starts -->
 			<div class="tb-contact pull-left">
 				<!-- Email -->
-				<i class="fa fa-envelope color"></i> &nbsp; <a href="mailto:mediatamawebindonesia@gmail.com">mediatamawebindonesia@gmail.com</a>
+				<i class="fa fa-envelope color"></i> &nbsp; <a href="mailto:sarianggrek61@gmail.com">sarianggrek61@gmail.com</a>
 				&nbsp;&nbsp;
 				<!-- Phone -->
-				<i class="fa fa-phone color"></i> &nbsp; +62 82170214495
+				<i class="fa fa-phone color"></i> &nbsp; +62 82392200330
 			</div>
 			<!-- Contact ends -->
 
 			<!-- Shopping kart starts -->
 			<div class="tb-shopping-cart pull-right">
 				<!-- Link with badge -->
-				
+
 				<a href="#" class="btn btn-white btn-xs b-dropdown"><i class="fa fa-shopping-cart"></i> <i class="fa fa-angle-down color"></i> <span class="badge badge-color">1</span></a>
 				<!-- Dropdown content with item details -->
 				<div class="b-dropdown-block">
@@ -109,17 +109,17 @@
 							</div>
 							<div class="clearfix"></div>
 						</li>
-						
+
 					</ul>
 					@endforeach
 
-					<a href="{{route('cart')}}" class="btn btn-color btn-sm">View Cart</a> 
+					<a href="{{route('cart')}}" class="btn btn-color btn-sm">View Cart</a>
 				</div>
 			</div>
 			<!-- Shopping kart ends -->
 
 			<!-- Langauge starts -->
-			
+
 			<!-- Language ends -->
 
 			<!-- Search section for responsive design -->
@@ -140,7 +140,7 @@
 			<!-- Search section ends -->
 
 			<!-- Social media starts -->
-			
+
 			<!-- Social media ends -->
 
 			<div class="clearfix"></div>
@@ -159,7 +159,7 @@
 					<!-- Logo section -->
 					<div class="logo">
 						<h1>
-							<img alt="" src="frontend/img/medi.png" class="footer-logo">
+							<img alt="" src="{{asset('frontend/img/medi.png')}}" class="footer-logo" height="50">
                             <!-- <a href="index.html"><i class="fa fa-bookmark-o"></i> Toko Buku</a></h1> -->
 					</div>
 				</div>
@@ -191,31 +191,31 @@
 						<li><a href="{{ route('home')}}">Home</a>
 
 							<!-- Submenu -->
-							
+
 						</li>
 						<li><a href="#">Kategori</a>
 							<ul>
 							@foreach ($kategori as $i => $isi)
-							
+
 								<li><a href="{{ route('kategoriF',$isi->id_kategori)}}">{{$isi->nama_kategori}}</a></li>
 								@endforeach
-							
+
 							</ul>
 						</li>
 
-					
+
 						<li><a href="#">Member</a>
 							<ul>
-							
+
 								@if(session('id_member') != '')
-								<li><a href="#" role="button" onclick="logouts()">Logout</a></li>		
+								<li><a href="#" role="button" onclick="logouts()">Logout</a></li>
 								@else
 							<li><a href="{{ route('loginf')}}">Login</a></li>
 							<li><a href="{{ route('registerf')}}">Daftar</a></li>
 							@endif
-								
+
 								<!-- Multi level menu -->
-								
+
 							</ul>
 						</li>
 						<li><a href="#">Transaksi</a>
@@ -225,14 +225,14 @@
 								<li><a href="{{ route('wishlist')}}"><span>Wishlist</span></a></li>
 								<li><a href="{{ route('pembayaran')}}"><span>Status Pembayaran</span></a></li>
 								<li><a href=""><span>Status Pengiriman</span></a></li>
-								
+
 							</ul>
 						</li>
 
 						<li><a href="{{ route('about')}}">About </a></li>
 						<li><a href="{{ route('login')}}">Admin</a></li>
 					</ul>
-					
+
 				</div>
 			</div>
 		</div>
@@ -291,17 +291,14 @@
 				<div class="footer-columns-entry">
 					<div class="row">
 						<div class="col-md-4">
-							<img alt="" src="frontend/img/medi.png" class="footer-logo">
-							<div class="footer-description">Jl. Dr. Sutomo No. 146, Kubu Marapalam,
-                            Kec. Lubuk Begalung, Kota Padang,
-                            Sumatera Barat, 25146
-                            Indonesia
+							<img alt="" src="{{asset('frontend/img/medi.png')}}" class="footer-logo" height="50">
+							<div class="footer-description">Jl. Permindo No.61-63, Kp. Jao, Kec. Padang Bar., Kota Padang, Sumatera Barat, Indonesia
                             </div>
 <div class="footer-description">
-								<b>Phone:</b> 082170214495<br>
-								<b>Email:</b>  mediatamawebindonesia@gmail.com<br>
+								<b>Phone:</b> 0751-22609<br>
+								<b>Email:</b>  sarianggrek61@gmail.com<br>
 							</div>
-						
+
 							<div class="clear"></div>
 						</div>
 						<div class="col-md-2 col-sm-4">
@@ -336,13 +333,13 @@
 								<li><a href="#">Website Administrator</a></li>
 								<li><a href="#">Social Media Administrator</a></li>
 								<li><a href="#">Graphic Design</a></li>
-								
+
 							</ul>
 							<div class="clear"></div>
 						</div>
 						<div class="clearfix visible-sm-block"></div>
-						
-							
+
+
 							<div class="clear"></div>
 						</div>
 					</div>
@@ -357,8 +354,8 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class=" footer-bottom-navigation">
-					
-                    <center> &copy; Copyright <strong><span >Mediatama Web Indonesia</span></strong>. All Rights Reserved</center>
+
+                    <center> &copy; Copyright <strong><span >Dewi Purnama</span></strong>. All Rights Reserved</center>
 					</div>
 				</div>
 			</div>
