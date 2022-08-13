@@ -96,6 +96,8 @@ Route::group(['middleware' => ['web', 'auth:member']], function (){
     Route::post('simpan-wish',[HomeControllerF::class, 'wish'])->name('simpan-wish') ;
     Route::get('hapus-wish/{id}',[HomeControllerF::class, 'hapus'])->name('hapus-wish') ;
 
+    Route::post('buynow/{id}',[TransControllerF::class, 'buynow'])->name('buynow') ;
+
     Route::get('pembayaran',[PembayaranControllerF::class, 'index'])->name('pembayaran') ;
     Route::post('send_result_midtrans',[PembayaranControllerF::class, 'send_result_midtrans'])->name('send.result.midtrans') ;
 
@@ -104,6 +106,9 @@ Route::group(['middleware' => ['web', 'auth:member']], function (){
 
 });
 Route::post('logoutf', [LoginControllerF::class, 'logoutf'])->name('logoutf');
+
+ // lupa password
+
 
 Route::group(['middleware' => 'guest:login'], function (){
     Route::get('login', [LoginController::class, 'login'])->name('login');
@@ -150,9 +155,12 @@ Route::group(['middleware' => ['web', 'auth:login']], function (){
     Route::post('update-buku/{id_buku}', [BukuController::class, 'updatebuku'])->name('update-buku');
     Route::get('hapus-buku/{id_buku}', [BukuController::class, 'hapusbuku'])->name('hapus-buku');
 
+    //updatestok
+    Route::get('input-stok-buku', [BukuController::class, 'tambahstok'])->name('input-stok-buku');
+    Route::post('update-stok-buku', [BukuController::class, 'updatestok'])->name('update-stok-buku');
     //tabel transaksi
     Route::get('transaksi', [TransaksiController::class, 'index'])->name('transaksi');
-    Route::get('print-transaksi', [TransaksiController::class, 'printtransaksi'])->name('print-transaksi');
+    Route::post('print-transaksi', [TransaksiController::class, 'printtransaksi'])->name('print-transaksi');
     Route::get('detail-transaksi/{id_transaksi}', [TransaksiController::class, 'detailtransaksi'])->name('detail-transaksi');
     Route::get('hapus-transaksi/{id_transaksi}', [TransaksiController::class, 'hapustransaksi'])->name('hapus-transaksi');
 

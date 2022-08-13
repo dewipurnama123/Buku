@@ -64,9 +64,6 @@
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
-                                    </div>
-                                    <div class="text-center">
                                         <a class="small" href="{{route('register')}}">Create an Account!</a>
                                     </div>
                                 </div>
@@ -80,6 +77,9 @@
         </div>
 
     </div>
+
+
+</div>
 
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('/')}}backend/vendor/jquery/jquery.min.js"></script>

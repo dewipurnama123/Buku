@@ -23,19 +23,13 @@ class TransaksiController extends Controller
         ->simplePaginate(10);
         return view('backend.page.transaksi', $data);
     }
-    public function printtransaksi()
+    public function printtransaksi(Request $r)
     {
         $data['transaksi'] = DB::table('transaksis')
                             ->join('members', 'transaksis.id_member','=','members.id')
-                            // ->join('keranjangs', 'transaksis.id_transaksi','=','keranjangs.id_transaksi')
-                            // ->join('keranjangs', 'bukus.id_buku','=','keranjangs.id_buku')
+                            ->whereBetween('transaksis.tgl',[$r->mulai,$r->sampai])
                             ->get();
-        // $data['detail'] = DB::table('keranjangs')
-        //                     ->join('bukus','keranjangs.id_buku','=','bukus.id_buku')
-        //                     ->where('id_transaksi',$id)->get();
-
-
-        // dd($data['transaksi']);
+                            // dd($r->mulai,$r->sampai);
         $data['member']=DB::table('members')->get();
 
         return view('backend.page.printtransaksi', $data);

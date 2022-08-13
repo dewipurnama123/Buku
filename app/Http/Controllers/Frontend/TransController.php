@@ -100,6 +100,45 @@ class TransController extends Controller
     }
 }
 
+public function buynow(Request $r,$id){
+
+    // simpan data ke dalam table transaksi
+    $id_member = Auth::user()->id;
+    $tgl = date('Y-m-d');
+
+    $databuku = DB::table('bukus')->where('id_buku',$id)->first();
+    $ongkir=23000;
+    $id_transaksi = DB::table('transaksis')->insertGetId([
+        'id_member' => $id_member,
+        'tgl' => $tgl,
+        'sub_total' => $databuku->harga,
+        'ongkir' => $ongkir,
+        'tot_bayar' => $databuku->harga+$ongkir,
+    ]);
+
+
+    // pindahkan semua data dari table keranjang tmp ke dalam tabel keranjang
+
+        $total = $databuku->stok - 1;
+
+        $up = DB::table('bukus')->where('id_buku',$id)->update(['stok' => $total ]);
+        $simpan = DB::table('keranjangs')->insert([
+            'id_transaksi' => $id_transaksi,
+            'id_member' => $id_member,
+            'id_buku' => $id,
+            'tgl' => $tgl,
+            'qty' => 1,
+            'total' => $databuku->harga,
+        ]);
+
+if($simpan == TRUE){
+    return redirect ('dettrans/'.$id_transaksi)-> with('success','Data Berhasil Disimpan');
+}else{
+    return back()-> with('error','Data Gagal Disimpan');
+
+}
+}
+
     public function cart1(){
         $id_member = Auth::user()->id;
         $data['kategori'] = DB::table('kategoris')->get();
@@ -216,6 +255,7 @@ public function transaksi(){
     ->get();
 
     $data['trans'] = DB::table('transaksis')
+    ->where('id_member',$id_member)
     ->get();
     return view ('frontend.page.transaksi',$data);
 

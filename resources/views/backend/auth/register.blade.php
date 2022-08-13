@@ -45,25 +45,28 @@
                                         @csrf
                                     <div class="form-group"><div class="form-group">
                                         <div class="form-group">
-                                        <input type="username" class="form-control form-control-user"
+                                            <input type="username" class="form-control form-control-user"
                                                         name="username" placeholder="Username">
                                         </div>
                                         <div class="form-group">
-                                        <input type="password" class="form-control form-control-user"
-                                                        name="password" placeholder="Password">
+                                            <input type="nama" class="form-control form-control-user"
+                                                        name="nama" placeholder="Nama">
                                         </div>
-                                        <input type="email" class="form-control form-control-user"
+                                        <div class="form-group">
+                                            <input type="email" class="form-control form-control-user"
                                                         name="email" placeholder="Email">
                                         </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control form-control-user"
+                                                        name="password" placeholder="Password">
+                                        </div>
+
 
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
                                             Register Account
                                         </button>
                                     </form>
                                     <hr>
-                                    <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
-                                    </div>
                                     <div class="text-center">
                                         <a class="small" href="{{route('login')}}">Already have an account? Login!</a>
                                     </div>

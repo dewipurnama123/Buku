@@ -12,9 +12,25 @@ Data Transaksi
                 <div class="float-left">
                     <h5>Laporan Transaksi</h5>
                 </div>
-                <div class="float-right">
-                    <a href=" {{route('print-transaksi')}}" class="btn btn-print btn-secondary btn-sm">Print <i></i><i class="fa fa-print"></i></a>
-                </div>
+                <form action="{{route('print-transaksi')}}" target="_blank" method="post">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="from-group">
+                                <input type="date" name="mulai" id="mulai" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="from-group">
+                                <input type="date" name="sampai" id="sampai" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-primary btn-sm">Print</button>
+                        </div>
+                    </div>
+
+                </form>
             </div>
             <div class="card-body">
                 <table class="table table-striped table-hover">
