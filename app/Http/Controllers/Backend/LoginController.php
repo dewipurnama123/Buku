@@ -20,6 +20,8 @@ class LoginController extends Controller
     public function daftar(Request $r){
         $validator = Validator::make($r->all(), [
             'username' => 'required',
+            'nama' => 'required',
+            'email' => 'required',
             'password' => 'required',
         ]);
 
@@ -29,6 +31,8 @@ class LoginController extends Controller
 
         $simpan = DB::table('logins')->insert([
             'username' => $r->username,
+            'nama' =>$r->nama,
+            'email' => $r->email,
             'password' => Hash::make($r->password),
         ]);
 
@@ -47,7 +51,8 @@ class LoginController extends Controller
             $r->session()->regenerate();
             return redirect('admin');
         }
-        return back();
+        dd($login);
+        // return back();
     }
 
     public function logout(Request $r){

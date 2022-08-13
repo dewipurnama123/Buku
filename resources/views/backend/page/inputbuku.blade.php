@@ -45,14 +45,20 @@
                                     <label for="">Tahun</label>
                                     <input type="number" name="tahun" class="form-control" placeholder="Pengarang">
                                 </div>
+                                @if(Auth::user()->level != 'ADMIN')
                                 <div class="form-group">
                                     <label for="">Harga</label>
                                     <input type="float" name="harga" class="form-control" placeholder="Harga">
                                 </div>
+
                                 <div class="form-group">
                                     <label for="">Stok</label>
                                     <input type="integer" name="stok" class="form-control" placeholder="Stok">
                                 </div>
+                                @else
+                                <input type="hidden" name="harga" value="0">
+                                <input type="hidden" name="stok" value="0">
+                                @endif
                                 <div class="form-group">
                                     <label for="">Gambar</label>
                                     <input type="file" name="gambar" class="form-control">

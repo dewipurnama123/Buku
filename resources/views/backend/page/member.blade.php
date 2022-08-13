@@ -12,9 +12,7 @@ Data Member
                 <div class="float-left">
                     <h5>Data Member</h5>
                 </div>
-                <div class="float-right">
-                    <a href="{{route('input-member')}}" class="btn btn-info btn-sm">Tambah Data <i></i><i class="fa fa-plus"></i></a>
-                </div>
+
             </div>
             <div class="card-body">
                 <table class="table table-striped table-hover">
@@ -22,9 +20,9 @@ Data Member
                         <tr>
                             <th>No</th>
                             <th>Nama</th>
-                            <th>Alamat</th>
                             <th>Provinsi</th>
                             <th>Kecamatan</th>
+                            <th>Alamat</th>
                             <th>Nohp</th>
                             <th>Email</th>
                             <th>Aksi</th>
@@ -34,10 +32,10 @@ Data Member
                         @foreach($member as $i=> $isi)
                         <tr>
                             <td>{{$member->firstItem() +$i}}</td>
-                            <!-- <td>{{ $i + 1 }}</td>
+
                             <td>{{ $isi->nama }}</td>
-                            <td>{{ $isi->province_id }}</td>
-                            <td>{{ $isi->city_id }}</td>
+                            <td>{{ $isi->prov }}</td>
+                            <td>{{ $isi->cit }}</td>
                             <td>{{ $isi->alamat }}</td>
                             <td>{{ $isi->nohp }}</td>
                             <td>{{ $isi->email }}</td>

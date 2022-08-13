@@ -28,14 +28,14 @@
                                             Login
                                         </button>
 										<div class="text-center">
-                        <a class="small" href="{{route('registerf')}}">Create an Account!</a> 
-						/ 
+                        <a class="small" href="{{route('registerf')}}">Create an Account!</a>
+						/
 						<a href="#" class="small" role="button" onclick="bukax()">Lupa Password</a>
-</div>
+        </div>
 					</form>
 				</div><!-- col-sm-5 -->
 
-				
+
 
 
 
@@ -74,7 +74,7 @@
 <script>
     function bukax() {
         $('#myModal').modal('show')
-        
+
     }
 </script>
 <!-- end  main content -->

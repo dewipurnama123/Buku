@@ -34,6 +34,7 @@
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-1">
                     <!-- <i class="fas fa-laugh-wink"></i> -->
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->username}}</span>
                     <img alt=""  src="{{ asset('/')}}backend/gambar/logo2.png" class="footer-logo" height="50" style="border-radius: 50%" >
                 </div>
                 <div class="sidebar-brand-text mx-3">Sarianggrek</div>
@@ -97,6 +98,14 @@
                     <span>Laporan Transaksi</span>
                 </a>
             </li>
+            @if(Auth::user()->level != 'ADMIN')
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{route('input-stok-buku')}}" >
+                <i class="fas fa-fw fa-book"></i>
+                    <span>Update Buku</span>
+                </a>
+            </li>
+            @endif
 
 
 
@@ -136,7 +145,6 @@
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->username}}</span>
                             <img class="img-profile rounded-circle" src="{{ asset('/')}}backend/gambar/anime3.jpg">
                         </a>
                         <!-- Dropdown - User Information -->

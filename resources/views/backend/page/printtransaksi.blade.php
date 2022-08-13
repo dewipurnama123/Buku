@@ -59,7 +59,7 @@
                      {{$isi->judul}} <br>
                     @endforeach
                 </td>
-                <td>{{ date("d-m-Y"), strtotime( $data->tgl)}}</td>
+                <td>{{ $data->tgl }}</td>
                 <td>{{($data->invoice)}}</td>
                 <td>Rp.{{ number_format($data->sub_total)}}</td>
                 <td>Rp. {{ number_format($data->tot_bayar)}}</td>

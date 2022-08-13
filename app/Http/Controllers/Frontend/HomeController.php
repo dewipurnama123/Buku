@@ -139,4 +139,71 @@ class HomeController extends Controller
             return redirect('wishlist')->with('error','Data Gagal Dihapus');
         }
     }
+
+    //buynow
+//     public function buynow(){
+//         $id_member = Auth::user()->id;
+//         // dd($id_member);
+//         $data['kategori'] = DB::table('kategoris')->get();
+
+//         $data['buy'] = DB::table('transaksis')
+//         ->join('members','transaksis.id_member','=','transaksis.id_member')->where('id_member',$id_member)
+//         ->get();
+//         $data['cart'] = DB::table('keranjangtmps')
+//         ->join('bukus','keranjangtmps.id_buku','=','bukus.id_buku')->where('id_member',$id_member)
+//         ->get();
+//         return view ('frontend.page.buynow',$data);
+
+//     }
+
+//     public function buy(Request $r)
+//     {
+//         $validator = Validator::make($r->all(),[
+//             'id_member' => 'required'
+
+//         ]);
+
+//         if ($validator->fails()){
+//             return redirect('wishlist')
+//             ->withErrors($validator)
+//             ->withInput();
+//         }else{
+//             $id_member = Auth::user()->id;
+//             // ambil harga barang dari id barang
+//             $barang = DB::table('members')->where('id_member',$r->id_member)->first();
+
+//             // cek id buku yang sama
+//             $cek = DB::table('wishlists')-> where('id_buku',$r->id_buku)
+//             ->where('id_member',$id_member)->first();
+//             // jika buku telah ada maka update qty
+//             if($cek==TRUE){
+//                $simpan= DB::table('wishlists')->where('id_wishlist',$cek->id_wishlist)
+//                 ->update([
+//                     'id_buku' => $cek->id_buku,
+//                 ]);
+//             }else{
+//                 $simpan= DB::table('wishlists')->insert([
+//                     'id_member'=> $id_member,
+//                     'id_buku'=> $r->id_buku,
+
+//                 ]);
+//             }
+//         }
+
+//         if($simpan == TRUE){
+//             return redirect ('wishlist')-> with('success','Data Berhasil Disimpan');
+//         }else{
+//             return redirect ('wishlist')-> with('error','Data Gagal Disimpan');
+//         }
+//     }
+
+//     public function hapusbuy($id)
+//     {
+//         $hapus = DB::table('transaksis')->where('id_transaksi',$id)->delete();
+//         if ($hapus==TRUE){
+//             return redirect('transaksis')->with('success','Data Berhasil Dihapus');
+//         }else{
+//             return redirect('transaksis')->with('error','Data Gagal Dihapus');
+//         }
+//     }
 }

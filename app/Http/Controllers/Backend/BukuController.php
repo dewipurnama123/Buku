@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Buku;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 class BukuController extends Controller
 {
@@ -41,6 +42,29 @@ class BukuController extends Controller
         $data['kategori']=DB::table('kategoris')->get();
         return view('backend.page.inputbuku', $data);
     }
+
+    public function tambahstok()
+    {
+        $data['buku'] = DB::table('bukus')->get();
+        return view('backend.page.inputstokbuku',$data);
+    }
+
+    public function updatestok(Request $r)
+    {
+        $tgl = date('Y-m-d');
+        //cek data buku
+        $cek = DB::table('bukus')->where('id_buku',$r->id_buku)->first();
+
+        //update stok
+        $stok = $cek->stok;
+        $stokmasuk = $stok + $r->jumlah;
+        DB::table('bukus')->where('id_buku',$r->id_buku)->update(['stok' => $stokmasuk]);
+
+        //simpan tabel history
+        $simpan = DB::table('histories')->insert(['id_buku' => $r->id_buku, 'jumlah' => $r->jumlah, 'tgl'=>$tgl]);
+        return back();
+    }
+
     public function save(Request $r)
     {
         $validator = Validator::make($r->all(), [
@@ -91,15 +115,17 @@ class BukuController extends Controller
     {
 
         if($r->file('gambar') == NULL){
-            $simpan = Buku::where('id_buku', $id)->update([
-                'id_kategori' =>$r->kategori_privat,
-                'judul' => $r->judul,
-                'penerbit' => $r->penerbit,
-                'pengarang' => $r->pengarang,
-                'tahun' => $r->tahun,
-                'harga' => $r->harga,
-                'stok' => $r->stok,
-            ]);
+            $data['id_kategori'] = $r->kategori_privat;
+                $data['judul'] = $r->judul;
+                $data['penerbit'] = $r->penerbit;
+                $data['pengarang'] = $r->pengarang;
+                $data['tahun'] = $r->tahun;
+                if(Auth::user()->level != 'ADMIN')
+                {
+                    $data['harga'] = $r->harga;
+                    $data['stok'] = $r->stok;
+                }
+            $simpan = Buku::where('id_buku', $id)->update($data);
         }else{
             $file =$r->file('gambar');
             $fileName = $file->getClientOriginalName();
@@ -133,7 +159,7 @@ class BukuController extends Controller
 
     public function hapusbuku($id)
     {
-        $fotoLama = DB::table('buku')->where('id_buku',$id)->first();
+        $fotoLama = DB::table('bukus')->where('id_buku',$id)->first();
 
         if($fotoLama->gambar != ''){
             unlink('gambar/'.$fotoLama->gambar);

@@ -18,9 +18,10 @@ class MemberController extends Controller
     {
         $data['provinces'] = Province::pluck('name', 'province_id');
         $data['member'] = DB::table('members')
-        // ->join('provinces','members.province_id','=','provinces.province_id')
-        // ->join('cities','members.city_id','=','cities.city_id')->get();
-        // ->select('provinces.province_id','cities.id','members.id as id_member','members.*')
+        ->join('provinces','members.province_id','=','provinces.province_id')
+        ->join('cities','members.city_id','=','cities.city_id')
+
+        ->select('provinces.province_id','cities.id','members.*', 'provinces.name as prov','cities.name as cit')
 
         // ->get();
         //pagination
