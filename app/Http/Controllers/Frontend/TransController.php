@@ -100,6 +100,16 @@ class TransController extends Controller
     }
 }
 
+public function updateqty(Request $r, $id = null)
+{
+    $harga = DB::table('bukus')->where('id_buku',$r->id_buku)->first();
+    $total = $harga->harga * $r->qty;
+    DB::table('transaksis')->where('id_transaksi',$id)->update(['sub_total' => $total]);
+    $up = DB::table('keranjangs')->where('id_transaksi',$id)->update(['qty' => $r->qty,'total' => $total]);
+
+    return back();
+}
+
 public function buynow(Request $r,$id){
 
     // simpan data ke dalam table transaksi

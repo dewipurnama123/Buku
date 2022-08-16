@@ -39,7 +39,9 @@
 										<tr>
 											<td>{{$i+1}}</td>
 											<!-- Product image -->
-											<td>{{$isi->invoice}}</td>
+											<td>
+                                                    {{$isi->invoice}}
+                                            </td>
                                             <td>{{$isi->payment_type}}</td>
 											<td>{{$isi->transaction_status}}</td>
 
