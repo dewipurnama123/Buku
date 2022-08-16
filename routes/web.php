@@ -85,6 +85,7 @@ Route::group(['middleware' => ['web', 'auth:member']], function (){
     Route::get('cart1',[TransControllerF::class, 'cart1'])->name('cart1') ;
     Route::post('simpan-cart',[TransControllerF::class, 'keranjang'])->name('simpan-cart') ;
     Route::get('hapus-cart/{id}',[TransControllerF::class, 'hapus'])->name('hapus-cart') ;
+    Route::post('update-cart/{id}',[TransControllerF::class, 'updateqty'])->name('update-cart') ;
 
 
     Route::get('qtytambah/{id_keranjang}/{id_buku}',[TransControllerF::class, 'qtytambah'])->name('qtytambah') ;
@@ -158,6 +159,10 @@ Route::group(['middleware' => ['web', 'auth:login']], function (){
     //updatestok
     Route::get('input-stok-buku', [BukuController::class, 'tambahstok'])->name('input-stok-buku');
     Route::post('update-stok-buku', [BukuController::class, 'updatestok'])->name('update-stok-buku');
+    Route::get('stok-barang-rusak', [BukuController::class, 'tambahrusak'])->name('stok-barang-rusak');
+    Route::post('pengembalian-buku-rusak', [BukuController::class, 'stokrusak'])->name('pengembalian-buku-rusak');
+    Route::get('konfirmasi-stok/{id}', [BukuController::class, 'kurangStok'])->name('konfirmasi-stok');
+
     //tabel transaksi
     Route::get('transaksi', [TransaksiController::class, 'index'])->name('transaksi');
     Route::post('print-transaksi', [TransaksiController::class, 'printtransaksi'])->name('print-transaksi');

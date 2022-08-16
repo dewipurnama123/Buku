@@ -49,7 +49,7 @@
                                         <tr>
                                             <td>Total Bayar</td>
                                             <td>:</td>
-                                            <td>Rp. {{number_format($trans->tot_bayar)}}</td>
+                                            <td>Rp. {{number_format($trans->sub_total + $trans->ongkir)}}</td>
                                         </tr>
 
                                         <!-- Product image -->
@@ -83,7 +83,16 @@
                                             <td>{{$isi->penerbit}}</td>
                                             <td>{{$isi->tahun}}</td>
                                             <td>Rp. {{number_format($isi->harga)}}</td>
-                                            <td>{{$isi->qty}}</td>
+                                            <td>
+                                                <form action="{{route('update-cart',$isi->id_transaksi)}}" method="post">
+                                                    @csrf
+                                                    <div class="form-inline">
+                                                        <input type="hidden" name="id_buku" value="{{$isi->id_buku}}">
+                                                        <input type="number" class="form-control" style="width:80px" onkeyup="updates('{{$isi->id_transaksi}}')" name="qty" id="qty" value="{{$isi->qty}}">
+                                                        <button type="submit" class="btn btn-warning btn-sm">update</button>
+                                                    </div>
+                                                </form>
+                                            </td>
                                             <td>{{$isi->berat}} gram</td>
                                         </tr>
                                         @endforeach
@@ -181,6 +190,8 @@
       }
       // customer will be redirected after completing payment pop-up
     });
+
+
 </script>
 
 @endsection

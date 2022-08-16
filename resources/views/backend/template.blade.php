@@ -24,7 +24,7 @@
 
 <body id="page-top">
     <script src="{{ asset('/')}}backend/vendor/jquery/jquery.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -107,7 +107,12 @@
             </li>
             @endif
 
-
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{route('stok-barang-rusak')}}" >
+                <i class="fas fa-fw fa-book"></i>
+                    <span>Pengembalian Buku Rusak</span>
+                </a>
+            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">

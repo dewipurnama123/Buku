@@ -61,7 +61,37 @@ class BukuController extends Controller
         DB::table('bukus')->where('id_buku',$r->id_buku)->update(['stok' => $stokmasuk]);
 
         //simpan tabel history
-        $simpan = DB::table('histories')->insert(['id_buku' => $r->id_buku, 'jumlah' => $r->jumlah, 'tgl'=>$tgl]);
+        $simpan = DB::table('histories')->insert(['id_buku' => $r->id_buku, 'jumlah' => $r->jumlah, 'tgl'=>$tgl,'status' => 'Masuk']);
+        return back();
+    }
+
+    public function tambahrusak()
+    {
+        $data['buku'] = DB::table('bukus')->get();
+        $data['rusak'] = DB::table('histories')->join('bukus','histories.id_buku','bukus.id_buku')->where('histories.status','Rusak')->get();
+
+        return view('backend.page.stokbarangrusak',$data);
+    }
+
+    public function kurangStok($id)
+    {
+        $cek = DB::table('histories')->where('id_history',$id)->first();
+
+        $buku = DB::table('bukus')->where('id_buku',$cek->id_buku)->first();
+
+        $jumlah = $buku->stok - $cek->jumlah;
+
+        $up = DB::table('bukus')->where('id_buku',$cek->id_buku)->update(['stok' => $jumlah]);
+            DB::table('histories')->where('id_history',$id)->update(['konfirm' => 1]);
+        return back();
+    }
+
+    public function stokrusak(Request $r)
+    {
+        $tgl = date('Y-m-d');
+        $cek = DB::table('bukus')->where('id_buku',$r->id_buku)->first();
+        //simpan tabel history
+        $simpan = DB::table('histories')->insert(['id_buku' => $r->id_buku, 'jumlah' => $r->jumlah, 'tgl'=>$tgl,'status' => 'Rusak']);
         return back();
     }
 
